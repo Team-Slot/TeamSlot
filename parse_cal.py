@@ -2,6 +2,7 @@ from ics import Calendar, Event
 import requests
 from datetime import datetime, time
 from itertools import product
+import arrow
 
 date_range = (datetime(2019, 9, 30, 0, 0), datetime(2019, 10, 10, 0, 0))
 time_range = (time(12, 0, 0), time(18, 0, 0))
@@ -21,10 +22,10 @@ giorgio_url = "https://timetable.soton.ac.uk/Feed/Index/3F5CEtjYxzy3GoqHuz66AdH6
 adomas = Calendar(requests.get(adomas_url).text)
 giorgio = Calendar(requests.get(giorgio_url).text)
 
-# l1 = list(adomas.timeline.included(date_range[0], date_range[1]))
-# l2 = list(giorgio.timeline.included(date_range[0], date_range[1]))
-l1 = list(adomas.timeline)
-l2 = list(giorgio.timeline)
+l1 = list(adomas.timeline.included(arrow.get(date_range[0]), arrow.get(date_range[1])))
+l2 = list(giorgio.timeline.included(arrow.get(date_range[0]), arrow.get(date_range[1])))
+# l1 = list(adomas.timeline)
+# l2 = list(giorgio.timeline)
 # t = list(cal.timeline.at())
 e = []
 l = [l1, l2]
@@ -51,6 +52,7 @@ overlap = union(e[0], e[1])
 
 for a in overlap:
     print(a)
+    # print(arrow.get(a[0]))
 
 # print(e, "\n")
 
