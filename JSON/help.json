@@ -1,0 +1,30 @@
+{
+	"blocks": [
+		{
+			"type": "section",
+			"text": {
+				"type": "mrkdwn",
+				"text": "Great, now we're ready to start scheduling!"
+			}
+		},
+		{
+			"type": "section",
+			"text": {
+				"type": "mrkdwn",
+				"text": "You can start scheduling a meeting by using the `/ts` command. I'll then send you a message :envelope: that asks you for your attendees and your preferences."
+			}
+		},
+		{
+			"type": "divider"
+		},
+		{
+			"type": "context",
+			"elements": [
+				{
+					"type": "mrkdwn",
+					"text": "❓ You can get help at any time with the `/ts help` command."
+				}
+			]
+		}
+	]
+}

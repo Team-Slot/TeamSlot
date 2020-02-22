@@ -1,0 +1,595 @@
+{
+	"type": "modal",
+	"title": {
+		"type": "plain_text",
+		"text": "Plan Meeting :notebook:",
+		"emoji": true
+	},
+	"submit": {
+		"type": "plain_text",
+		"text": "Submit",
+		"emoji": true
+	},
+	"close": {
+		"type": "plain_text",
+		"text": "Cancel",
+		"emoji": true
+	},
+	"blocks": [
+		{
+			"type": "section",
+			"text": {
+				"type": "mrkdwn",
+				"text": "Alright, let's get planning this meeting! :family:"
+			}
+        },
+        {
+			"type": "divider"
+		},
+		{
+			"type": "input",
+            "block_id": "participants",
+			"label": {
+				"type": "plain_text",
+				"text": "First, I need to know is who is going to be attending:",
+                "emoji": true
+			},
+			"element": {
+				"type": "multi_users_select",
+				"placeholder": {
+					"type": "plain_text",
+					"text": "Select participants"
+				}
+			}
+		},
+        {
+            "type": "divider"
+        },
+		{
+			"type": "section",
+			"text": {
+				"type": "mrkdwn",
+				"text": "Now I need to know what time frame you want to host :microphone: the meeting at. \n *Select a start date and an end date* :date::"
+			}
+		},
+		{
+			"type": "actions",
+            "block_id": "dates",
+			"elements": [
+				{
+					"type": "datepicker",
+					"placeholder": {
+						"type": "plain_text",
+						"text": "Select a start date",
+						"emoji": true
+					}
+				},
+				{
+					"type": "datepicker",
+					"placeholder": {
+						"type": "plain_text",
+						"text": "Select an end date",
+						"emoji": true
+					}
+				}
+			]
+		},
+		{
+			"type": "context",
+			"elements": [
+				{
+					"type": "mrkdwn",
+					"text": "Don't worry! - you can select specific dates in this time that you can't do later. :ok_hand:"
+				}
+			]
+		},
+        {
+            "type": "divider"
+        },
+		{
+			"type": "input",
+			"block_id": "duration",
+			"label": {
+				"type": "plain_text",
+				"text": "Ok great! - now I need to know how long you want the meeting to be: :straight_ruler:",
+                "emoji": true
+			},
+			"element": {
+				"type": "static_select",
+				"placeholder": {
+					"type": "plain_text",
+					"text": "Duration of meeting in minutes"
+				},
+                "options": [
+                {
+                	"text": {
+                		"type": "plain_text",
+                		"text": "30 minutes"
+            		},
+					"value": "duration1"
+                },
+            	{
+                	"text": {
+                		"type": "plain_text",
+                		"text": "1 hour"
+            		},
+            		"value": "duration2"
+                },
+                {
+                	"text": {
+                		"type": "plain_text",
+                		"text": "1 hour, 30 minutes"
+            		},
+					"value": "duration3"
+                },
+                {
+                	"text": {
+                		"type": "plain_text",
+                		"text": "2 hours"
+            		},
+					"value": "duration4"
+                },
+                {
+                	"text": {
+                		"type": "plain_text",
+                		"text": "2 hours, 30 minutes"
+            		},
+					"value": "duration5"
+                },
+                {
+                	"text": {
+                		"type": "plain_text",
+                		"text": "3 hours"
+            		},
+					"value": "duration6"
+                }
+              ]
+			}
+		},
+        {
+			"type": "divider"
+		},
+        {
+            "type": "section",
+            "text": {
+                "type": "mrkdwn",
+                "text": "Last thing I promise! :pray: Give me a time :alarm_clock: frame for when during the day :sun_with_face: you want the meeting to take place. \n *Select a minimum :chart_with_downwards_trend: start time and maximum :chart_with_upwards_trend: end time for the meeting:*"
+            }
+        },
+        {
+            "type": "section",
+            "text": {
+                "type": "mrkdwn",
+                "text": "*Minimum time:*"
+            }
+        },
+        {
+        	"type": "actions",
+    		"block_id": "time1",
+            "elements": [
+                {
+                    "type": "static_select",
+                    "placeholder": {
+                            "type": "plain_text",
+                            "text": "09"
+                    },
+                    "options": [
+                    {
+                        "text": {
+                            "type": "plain_text",
+                            "text": "00"
+                        },
+                        "value": "time1-1-0"
+                    },
+                    {
+                        "text": {
+                            "type": "plain_text",
+                            "text": "01"
+                        },
+                        "value": "time1-1-1"
+                    },
+                    {
+                        "text": {
+                            "type": "plain_text",
+                            "text": "02"
+                        },
+                        "value": "time1-1-2"
+                    },
+                    {
+                        "text": {
+                            "type": "plain_text",
+                            "text": "03"
+                        },
+                        "value": "time1-1-3"
+                    },
+                    {
+                        "text": {
+                            "type": "plain_text",
+                            "text": "04"
+                        },
+                        "value": "time1-1-4"
+                    },
+                    {
+                        "text": {
+                            "type": "plain_text",
+                            "text": "05"
+                        },
+                        "value": "time1-1-5"
+                    },
+                    {
+                        "text": {
+                            "type": "plain_text",
+                            "text": "06"
+                        },
+                        "value": "time1-1-6"
+                    },
+                    {
+                        "text": {
+                            "type": "plain_text",
+                            "text": "07"
+                        },
+                        "value": "time1-1-7"
+                    },
+                    {
+                        "text": {
+                            "type": "plain_text",
+                            "text": "08"
+                        },
+                        "value": "time1-1-8"
+                    },
+                    {
+                        "text": {
+                            "type": "plain_text",
+                            "text": "09"
+                        },
+                        "value": "time1-1-9"
+                    },
+                    {
+                        "text": {
+                            "type": "plain_text",
+                            "text": "10"
+                        },
+                        "value": "time1-1-10"
+                    },
+                    {
+                        "text": {
+                            "type": "plain_text",
+                            "text": "11"
+                        },
+                        "value": "time1-1-11"
+                    },
+                    {
+                        "text": {
+                            "type": "plain_text",
+                            "text": "12"
+                        },
+                        "value": "time1-1-12"
+                    },
+                    {
+                        "text": {
+                            "type": "plain_text",
+                            "text": "13"
+                        },
+                        "value": "time1-1-13"
+                    },
+                    {
+                        "text": {
+                            "type": "plain_text",
+                            "text": "14"
+                        },
+                        "value": "time1-1-14"
+                    },
+                    {
+                        "text": {
+                            "type": "plain_text",
+                            "text": "15"
+                        },
+                        "value": "time1-1-15"
+                    },
+                    {
+                        "text": {
+                            "type": "plain_text",
+                            "text": "16"
+                        },
+                        "value": "time1-1-16"
+                    },
+                    {
+                        "text": {
+                            "type": "plain_text",
+                            "text": "17"
+                        },
+                        "value": "time1-1-17"
+                    },
+                    {
+                        "text": {
+                            "type": "plain_text",
+                            "text": "18"
+                        },
+                        "value": "time1-1-18"
+                    },
+                    {
+                        "text": {
+                            "type": "plain_text",
+                            "text": "19"
+                        },
+                        "value": "time1-1-19"
+                    },
+                    {
+                        "text": {
+                            "type": "plain_text",
+                            "text": "20"
+                        },
+                        "value": "time1-1-20"
+                    },
+                    {
+                        "text": {
+                            "type": "plain_text",
+                            "text": "21"
+                        },
+                        "value": "time1-1-21"
+                    },
+                    {
+                        "text": {
+                            "type": "plain_text",
+                            "text": "22"
+                        },
+                        "value": "time1-1-22"
+                    },
+                    {
+                        "text": {
+                            "type": "plain_text",
+                            "text": "23"
+                        },
+                        "value": "time1-1-23"
+                    }
+                  ]
+                },
+                {
+                    "type": "static_select",
+                    "placeholder": {
+                            "type": "plain_text",
+                            "text": "00"
+                    },
+                    "options": [
+                    {
+                        "text": {
+                            "type": "plain_text",
+                            "text": "00"
+                        },
+                        "value": "time1-2-1"
+                    },
+                    {
+                        "text": {
+                            "type": "plain_text",
+                            "text": "30"
+                        },
+                        "value": "time1-2-30"
+                    }
+                  ]
+                }
+            ]
+        },
+        {
+            "type": "section",
+            "text": {
+                "type": "mrkdwn",
+                "text": "*Maximum time:*"
+            }
+        },
+        {
+            "type": "actions",
+            "block_id": "time2",
+            "elements": [
+                {
+                    "type": "static_select",
+                    "placeholder": {
+                            "type": "plain_text",
+                            "text": "09"
+                    },
+                    "options": [
+                    {
+                        "text": {
+                            "type": "plain_text",
+                            "text": "00"
+                        },
+                        "value": "time2-1-0"
+                    },
+                    {
+                        "text": {
+                            "type": "plain_text",
+                            "text": "01"
+                        },
+                        "value": "time2-1-1"
+                    },
+                    {
+                        "text": {
+                            "type": "plain_text",
+                            "text": "02"
+                        },
+                        "value": "time2-1-2"
+                    },
+                    {
+                        "text": {
+                            "type": "plain_text",
+                            "text": "03"
+                        },
+                        "value": "time2-1-3"
+                    },
+                    {
+                        "text": {
+                            "type": "plain_text",
+                            "text": "04"
+                        },
+                        "value": "time2-1-4"
+                    },
+                    {
+                        "text": {
+                            "type": "plain_text",
+                            "text": "05"
+                        },
+                        "value": "time2-1-5"
+                    },
+                    {
+                        "text": {
+                            "type": "plain_text",
+                            "text": "06"
+                        },
+                        "value": "time2-1-6"
+                    },
+                    {
+                        "text": {
+                            "type": "plain_text",
+                            "text": "07"
+                        },
+                        "value": "time2-1-7"
+                    },
+                    {
+                        "text": {
+                            "type": "plain_text",
+                            "text": "08"
+                        },
+                        "value": "time2-1-8"
+                    },
+                    {
+                        "text": {
+                            "type": "plain_text",
+                            "text": "09"
+                        },
+                        "value": "time2-1-9"
+                    },
+                    {
+                        "text": {
+                            "type": "plain_text",
+                            "text": "10"
+                        },
+                        "value": "time2-1-10"
+                    },
+                    {
+                        "text": {
+                            "type": "plain_text",
+                            "text": "11"
+                        },
+                        "value": "time2-1-11"
+                    },
+                    {
+                        "text": {
+                            "type": "plain_text",
+                            "text": "12"
+                        },
+                        "value": "time2-1-12"
+                    },
+                    {
+                        "text": {
+                            "type": "plain_text",
+                            "text": "13"
+                        },
+                        "value": "time2-1-13"
+                    },
+                    {
+                        "text": {
+                            "type": "plain_text",
+                            "text": "14"
+                        },
+                        "value": "time2-1-14"
+                    },
+                    {
+                        "text": {
+                            "type": "plain_text",
+                            "text": "15"
+                        },
+                        "value": "time2-1-15"
+                    },
+                    {
+                        "text": {
+                            "type": "plain_text",
+                            "text": "16"
+                        },
+                        "value": "time2-1-16"
+                    },
+                    {
+                        "text": {
+                            "type": "plain_text",
+                            "text": "17"
+                        },
+                        "value": "time2-1-17"
+                    },
+                    {
+                        "text": {
+                            "type": "plain_text",
+                            "text": "18"
+                        },
+                        "value": "time2-1-18"
+                    },
+                    {
+                        "text": {
+                            "type": "plain_text",
+                            "text": "19"
+                        },
+                        "value": "time2-1-19"
+                    },
+                    {
+                        "text": {
+                            "type": "plain_text",
+                            "text": "20"
+                        },
+                        "value": "time2-1-20"
+                    },
+                    {
+                        "text": {
+                            "type": "plain_text",
+                            "text": "21"
+                        },
+                        "value": "time2-1-21"
+                    },
+                    {
+                        "text": {
+                            "type": "plain_text",
+                            "text": "22"
+                        },
+                        "value": "time2-1-22"
+                    },
+                    {
+                        "text": {
+                            "type": "plain_text",
+                            "text": "23"
+                        },
+                        "value": "time2-1-23"
+                    }
+                  ]
+                },
+                {
+                    "type": "static_select",
+                    "placeholder": {
+                            "type": "plain_text",
+                            "text": "00"
+                    },
+                    "options": [
+                    {
+                        "text": {
+                            "type": "plain_text",
+                            "text": "00"
+                        },
+                        "value": "time2-2-0"
+                    },
+                    {
+                        "text": {
+                            "type": "plain_text",
+                            "text": "30"
+                        },
+                        "value": "time2-2-30"
+                    }
+                  ]
+                }
+            ]
+        },
+        {
+			"type": "context",
+			"elements": [
+				{
+					"type": "mrkdwn",
+					"text": "Again, don't worry! - you can select specific times that you can't do later. :punch:"
+				}
+			]
+		}    
+	]
+}
