@@ -1,7 +1,3 @@
-##  Plan the code out here :
-##  make method which takes tuple list of all users tuples and send to 
-
-
 class Scheduler:
     def __init__(self, idealStart, idealEnd):
         self.users = list()
@@ -10,7 +6,6 @@ class Scheduler:
         self.sentItems = list()
         self.idealStart = idealStart
         self.idealEnd = idealEnd
-
 
     def addUser(self,usr):
         self.users.append(usr)
@@ -74,8 +69,3 @@ class Scheduler:
                 break
 
         return selectedThree
-
-
-
-##class User:
-    pass

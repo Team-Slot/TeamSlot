@@ -1,7 +1,7 @@
 import datetime
 
 # Splits available times into blocks of the right length
-def selectAvailableBlocks(timeBlocks, meetingLength):
+def __selectAvailableBlocks(timeBlocks, meetingLength):
     allBlocks = timeBlocks.copy()
     available = set()
 
