@@ -30,3 +30,15 @@ TeamSlot can potentially be used on various platforms, with a public API for any
 To use the API, developers need to first instantiate our ScheduleCore class and pass user data with the provided functions. After this, developers will need to call the `processRequest` function to handle an initial request to schedule a meeting. This will handle the scheduling and after calculating available slots, return some initial options that can be presented to the end user(s). From here, developers can implement their applications to allow for further options with our `getMoreOptions` function, which will return any remaining options calculated. We developed this function to first return ideal slots (according to our heuristics), filling in with the remaining options once these run out.
 
 Once the user has seen the slot options, they can reply to say which they won't be available for - this allows for situations where a user doesn't have all their commitments in their calendar. Following this, ScheduleCore will decide on a final slot and return this to the developer.
+
+### API functions
+
+- initialiser
+- addUser(userid, calURL) - takes a userid with a iCal URL and enters this to the database on the backend
+- updateUser(userid, newCalURL) - takes a userid with a new iCal URL and updates this on the database on the backend
+- processRequest(users, dateRange, workingHours, meetingLength, idealHours = (9,17)) - takes a few parameters to calculate possible slots and supply the initial options from these:
+  - users: a list of userids to represent the list of group members intended to attend said meeting
+  - dateRange: a touple of datetimes to represent the dates to book the meeting between e.g. 23/02/2020 until 28/02/2020
+  - workingHours: a touple of datetime.time to represent the times that the team are willing to work between, the times of the day that the meeting must not be booked outside of
+- getMoreOptions(): returns remaining options, used if none of the options supplied work for everybody
+- getFinalSlot(): taking a list (potentially empty) of slots that don't work for everybody in the team, this function then calculates the slots that do work for everybody and determines a slot for the meeting, returning this as the final slot
