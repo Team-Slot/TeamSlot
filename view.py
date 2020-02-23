@@ -48,8 +48,15 @@ def handle_events():
 @app.route('/slack/requests', methods=['POST'])
 def handle_requests():
     info = json.loads(request.form['payload'])
+
     if 'type' in info and info['type'] == 'view_submission':
-        print('submit')
+        title = info['view']['title']['text']
+        user_id = info['user']['id']
+        values = info['view']['state']['values']
+
+        if title == 'Configuration':
+            store_user(user_id, values['calendar']['calendar_input']['value'])
+        elif title == ''
     return ''
 
 
