@@ -1,16 +1,41 @@
 # Dummy class for database, to do
+import sqlite3
+
+
 class Database:
     def __init__(self):
         pass
 
     def getCal(self, userid):
-        if (userid == 1):
-            return 'https://timetable.soton.ac.uk/Feed/Index/fIHGtdhnnOuh7EhjMXQpJnRDR6epdJ7dXwgeUFEmcXRFB-aSPSEL8_ePZ17eCvDjzen3DuMZKJOOcDRzUxM3rA2'
-        elif (userid == 2):
-            return 'https://timetable.soton.ac.uk/Feed/Index/1c5P_0iSTuK5wEjhOeZ19Y7iAFmBCDqc1rujkVBGZNznScad_OBDJziGaUB9Xn7YhlJCMR-ZOreXx7VQeH6miQ2'
+        db = sqlite3.connect('teamslot.db')
+        c = db.cursor()
+
+        c.execute('''SELECT ical_url FROM users
+                     WHERE id = ?''', (userid,))
+
+        result = c.fetchone()[0]
+
+        db.commit()
+        db.close()
+
+        return result
 
     def addUser(self, userid, calURL):
-        pass
+        db = sqlite3.connect('teamslot.db')
+        c = db.cursor()
+
+        c.execute('''INSERT OR REPLACE INTO users
+                     VALUES(?, ?)''', (userid, calURL))
+
+        db.commit()
+        db.close()
 
     def updateUser(self, userid, newCalURL):
-        pass
+        db = sqlite3.connect('teamslot.db')
+        c = db.cursor()
+
+        c.execute('''INSERT OR REPLACE INTO users
+                     VALUES(?, ?)''', (userid, newCalURL))
+
+        db.commit()
+        db.close()
