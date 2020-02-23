@@ -42,3 +42,9 @@ Once the user has seen the slot options, they can reply to say which they won't 
   - workingHours: a touple of datetime.time to represent the times that the team are willing to work between, the times of the day that the meeting must not be booked outside of
 - getMoreOptions(): returns remaining options, used if none of the options supplied work for everybody
 - getFinalSlot(): taking a list (potentially empty) of slots that don't work for everybody in the team, this function then calculates the slots that do work for everybody and determines a slot for the meeting, returning this as the final slot
+
+## Dependencies
+
+TeamSlot's ScheduleCore has a few dependencies, these are
+- Python (inc datetime, ics, requests, itertools and arrow)
+- SQLite
