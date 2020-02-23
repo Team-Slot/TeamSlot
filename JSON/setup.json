@@ -45,6 +45,29 @@
         {
             "type": "divider"
         },
+        {
+            "type": "input",
+            "block_id": "description",
+            "label": {
+                "type": "plain_text",
+                "text": "Next I need a description :clipboard: of the purpose of the meeting:",
+                "emoji": true
+            },
+            "element":
+                {
+                    "type": "plain_text_input",
+                    "min_length": 5,
+                    "max_length": 200,
+                    "placeholder": {
+                        "type": "plain_text",
+                        "text": "Describe the purpose of the meeting."
+                    }
+                }
+        
+        },
+        {
+            "type": "divider"
+        },
 		{
 			"type": "section",
 			"text": {
@@ -57,7 +80,8 @@
             "block_id": "dates",
 			"elements": [
 				{
-					"type": "datepicker",
+                    "type": "datepicker",
+                    "action_id": "start",
 					"placeholder": {
 						"type": "plain_text",
 						"text": "Select a start date",
@@ -65,7 +89,8 @@
 					}
 				},
 				{
-					"type": "datepicker",
+                    "type": "datepicker",
+                    "action_id": "end",
 					"placeholder": {
 						"type": "plain_text",
 						"text": "Select an end date",
