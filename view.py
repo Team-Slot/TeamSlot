@@ -6,6 +6,8 @@ import datetime
 
 from flask import Flask, request
 
+from ScheduleCore import ScheduleCore
+
 app = Flask(__name__)
 
 
@@ -63,16 +65,20 @@ def handle_requests():
             start_date = values['start_date']['start']['selected_date']
             start_date = datetime.datetime.strptime(start_date, '%Y-%m-%d')
             end_date = values['end_date']['end']['selected_date']
-            end_date = datetime.datetime.strptime(start_date, '%Y-%m-%d')
+            end_date = datetime.datetime.strptime(end_date, '%Y-%m-%d')
             date_range = (start_date, end_date)
             min_time = values['min_time']['min_time_menu']['selected_option']['text']['text']
-            min_time = datetime.datetime.strptime(min_time, '%H:%M')
+            min_time = datetime.datetime.strptime(min_time, '%H:%M').time()
             max_time = values['max_time']['max_time_menu']['selected_option']['text']['text']
-            max_time = datetime.datetime.strptime(max_time, '%H:%M')
+            max_time = datetime.datetime.strptime(max_time, '%H:%M').time()
             working_hours = (min_time, max_time)
             time_duration = values['duration']['time_duration']['selected_option']['value']
             time_duration = datetime.timedelta(hours=int(int(time_duration[-1]) * 0.5))
-            pass
+            description = values['description']['description_field']['value']
+            sc = ScheduleCore()
+            sc.processRequest(users, date_range, working_hours, time_duration, description)
+        elif title == 'Meeting Request':
+            print()
     return ''
 
 

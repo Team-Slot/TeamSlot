@@ -17,7 +17,7 @@ class ScheduleCore:
         self.database.updateUser(userid, newCalURL)
 
     # Processes incoming requests to schedule
-    def processRequest(self, users, dateRange, workingHours, meetingLength, idealHours = (9,17)):
+    def processRequest(self, users, dateRange, workingHours, meetingLength, description, idealHours = (9,17)):
         # Gather calendar URLs from userids
         calURLS = []
 
@@ -35,6 +35,7 @@ class ScheduleCore:
 
         # Instantiate Options class to handle selecting options to send
         self.options = Options(idealSlots, otherSlots)
+        self.description = description
 
         # Send first options
         return self.options.getOptions()
@@ -50,11 +51,11 @@ class ScheduleCore:
         else:
             return None
 
-date_range = (datetime(2019, 9, 30, 0, 0), datetime(2019, 10, 10, 0, 0))  # hard-coded test date range
-time_range = (time(6, 0), time(19, 0))  # hard-coded test time range
-
-sc = ScheduleCore()
-three = sc.processRequest([1,2], date_range, time_range, timedelta(hours=1))
-
-for o in three:
-    print(o)
+# date_range = (datetime(2019, 9, 30, 0, 0), datetime(2019, 10, 10, 0, 0))  # hard-coded test date range
+# time_range = (time(6, 0), time(19, 0))  # hard-coded test time range
+#
+# sc = ScheduleCore()
+# three = sc.processRequest([1,2], date_range, time_range, timedelta(hours=1), 'random')
+#
+# for o in three:
+#     print(o)
