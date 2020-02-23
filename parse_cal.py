@@ -5,7 +5,7 @@ from itertools import product
 import arrow
 
 date_range = (datetime(2019, 9, 30, 0, 0), datetime(2019, 10, 10, 0, 0))
-time_range = (time(13, 0), time(19, 0))
+time_range = (time(6, 0), time(19, 0))
 
 adomas_url = "https://timetable.soton.ac.uk/Feed/Index/fIHGtdhnnOuh7EhjMXQpJnRDR6epdJ7dXwgeUFEmcXRFB-aSPSEL8_ePZ17eCvDjzen3DuMZKJOOcDRzUxM3rA2"
 giorgio_url = "https://timetable.soton.ac.uk/Feed/Index/3F5CEtjYxzy3GoqHuz66AdH6zeQdZrrIFz8fMVBq9-iZOwA0W71GlsIbkmxtukoR36zSPs1OGxbnv5-YmyJ87g2"
@@ -60,9 +60,35 @@ overlap = union(e[0], e[1])
 
 for a in overlap:
     print(a)
-    # print(arrow.get(a[0]))
+
+def invert(l):
+    inverted = []
+
+    for i,(a,b) in enumerate(l):
+
+        dt_start = datetime.combine(datetime.date(a), time_range[0])
+        # print(dt_start)
+        dt_end = datetime.combine(datetime.date(a), time_range[1])
+        # print(dt_end)
+
+        if (i == 0 and a > dt_start) or datetime.date(l[i-1][0]) != datetime.date(a):
+            inverted.append((dt_start, a))
+        elif (i == len(l)-1 and b < dt_end) or datetime.date(l[i+1][0]) != datetime.date(a):
+            inverted.append((b, dt_end))
+        else:
+            e = l[i][1] # this end
+            s = l[i+1][0] # next start
+            delta = s - e
+            if delta:
+                inverted.append((e,s))
+
+    return inverted
+
+final = invert(overlap)
+
+
+print("\n")
+for b in final:
+    print(b)
 
 # print(e, "\n")
-
-# todo - cut off hours outside defined range
-# todo - cut off dates outside defined range
