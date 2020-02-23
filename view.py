@@ -27,7 +27,9 @@ def handle_commands():
         text = fill_block('setup', [('Master_ID', [user_id])])
         open_modal_str(text, trigger_id)
     elif command == '/ts-select':
-        open_modal('request', trigger_id)
+        options = options_from_db()
+        filled = fill_block('request', [('Meeting', options)])
+        open_modal_str(filled, trigger_id)
     elif command == '/ts-confirm':
         open_modal('confirm_request', trigger_id)
     elif command == '/ts-config':
@@ -80,21 +82,56 @@ def handle_requests():
             time_duration = values['duration']['time_duration']['selected_option']['value']
             time_duration = datetime.timedelta(hours=int(int(time_duration[-1]) * 0.5))
             description = values['description']['description_field']['value']
-            thread = Thread(target=calculate_options_to_db, args=(users, date_range, working_hours, time_duration, description))
+            thread = Thread(target=calculate_options_to_db, args=(users, date_range, working_hours, time_duration, description, user_id))
             thread.start()
         elif title == 'Meeting Request':
-            #options = options_from_db()
-            #filled = fill_block('request_intro', [('Meeting', options)])
-            #push_block_str(filled, user_id)
+            selected = values['meetings']['meeting']['selected_options']
+            allValues = info['view']['blocks'][0]['element']['options']
+            if len([s for s in selected if s['value'] == 'allMeetings']) > 0:
+
 
             print()
     return ''
 
 
-def calculate_options_to_db(users, date_range, working_hours, time_duration, description):
+def options_from_db():
+    db = sqlite3.connect('teamslot.db')
+    c = db.cursor()
+    options = list()
+
+    c.execute('''SELECT * FROM options''')
+    for start, end in c.fetchall():
+        start_time = datetime.datetime.strptime(start, '%Y-%m-%d %H:%M:%S')
+        end_time = datetime.datetime.strptime(end, '%Y-%m-%d %H:%M:%S')
+        options.append(range_str(start_time, end_time))
+
+    db.commit()
+    db.close()
+    return options
+
+
+def range_str(start, end):
+    return start.strftime('%H:%M - ') + end.strftime('%H:%M   %d/%m/%Y')
+
+
+def calculate_options_to_db(users, date_range, working_hours, time_duration, description, master):
     sc = ScheduleCore()
     options = sc.processRequest(users, date_range, working_hours, time_duration, description)
-    # write to db TODO
+    db = sqlite3.connect('teamslot.db')
+    c = db.cursor()
+
+    for begin, end in options:
+        c.execute('''INSERT OR REPLACE INTO options
+                 VALUES(?, ?)''', (begin, end))
+
+    c.execute('''INSERT INTO user_number
+                 VALUES(?)''', (len(users),))
+
+    db.commit()
+    db.close()
+    for user in users:
+        text = fill_block('request_intro', [('User',['@' + get_user_name(user)]), ('Master',['@' + get_user_name(master)]), ('Description', [description])])
+        push_block_str(text, user)
 
 
 def fill_block(file, replacements): # replacements is a list of tuples of word and list
@@ -102,16 +139,30 @@ def fill_block(file, replacements): # replacements is a list of tuples of word a
         text = json_file.read()
     for (word, repls) in replacements:
         i = 0
-        while True:
-            new_text = re.sub('<.*{}.*>'.format(word), repls[i], text)
-            if new_text != text:
-                text = new_text
-                i += 1
-                i %= len(repls)
-            else:
-                break
+        sindex = 0
+        rindex = 0
+        leng = len(text)
+        while rindex < leng:
+            char = text[rindex]
+            if char == '<':
+                sindex = text.index('<')
+            if char == '>':
+                eindex = text.index('>') + 1
+                if word in text[sindex:eindex]:
+                    text = text[:sindex] + repls[i] + text[eindex:]
+                    rindex = 0
+                    leng = len(text)
+                    i += 1
+                    i %= len(repls)
+            rindex += 1
 
     return text
+
+
+def get_user_name(user_id):
+    client = slack.WebClient(token=os.environ['SLACK_API_TOKEN'])
+
+    return client.users_info(user=user_id)['user']['name']
 
 
 def store_user(user_id, ical_link):
