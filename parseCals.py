@@ -50,9 +50,9 @@ def invert(l, timeRange):
         dt_end = datetime.combine(datetime.date(a), timeRange[1])
 
         # Invert datetime to available blocks and append
-        if (i == 0 and a > dt_start) or datetime.date(l[i - 1][0]) != datetime.date(a):
+        if (i == 0 and a > dt_start) or (datetime.date(l[i-1][1]) != datetime.date(a) and  a >= dt_start):
             inverted.append((dt_start, a))
-        elif (i == len(l) - 1 and b < dt_end) or datetime.date(l[i + 1][0]) != datetime.date(a):
+        elif ( i == len(l)-1 or (datetime.date(l[i + 1][0]) != datetime.date(a)) ) and b<=dt_end:
             inverted.append((b, dt_end))
         else:
             e = l[i][1]  # this end
