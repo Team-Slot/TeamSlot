@@ -27,15 +27,6 @@
 			"element": {
 				"type": "checkboxes",
 				"action_id": "meeting",
-				"initial_options": [
-					{
-						"value": "allMeetings",
-						"text": {
-							"type": "plain_text",
-							"text": "All options are fine"
-						}
-					}
-				],
 				"options": [
 					{
 						"value": "meeting1",

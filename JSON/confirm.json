@@ -4,7 +4,7 @@
 			"type": "section",
 			"text": {
 				"type": "mrkdwn",
-				"text": "Hey <User>! 👋 Looks like your meeting with *<Master>* at <Time> is all set up! \n They provided the following details :pushpin:: \n\n <Details>"
+				"text": "Hey <User>! 👋 Looks like your meeting with *<Master>* at <Time> is all set up! \n "
 			}
 		}
 	]
