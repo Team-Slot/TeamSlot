@@ -17,14 +17,16 @@
 	},
 	"blocks": [
 		{
-			"type": "section",
-			"text": {
-				"type": "mrkdwn",
-				"text": "From the following options, please tick :ballot_box_with_check: the times that you *CAN'T* :no_entry_sign: make:"
+			"type": "input",
+			"block_id": "meetings",
+			"label": {
+				"type": "plain_text",
+				"text": "From the following options, please tick :ballot_box_with_check: the times that you CAN'T :no_entry_sign: make:",
+				"emoji": true
 			},
-			"accessory": {
+			"element": {
 				"type": "checkboxes",
-				"action_id": "meetings",
+				"action_id": "meeting",
 				"options": [
 					{
 						"value": "meeting1",

@@ -25,12 +25,14 @@
         },
         {
             "type": "input",
+            "block_id": "calendar",
             "label": {
                 "type": "plain_text",
                 "text": "Enter the iCal :calendar: link it provides below:"
             },
             "element": {
                 "type": "plain_text_input",
+                "action_id": "calendar_input",
                 "placeholder": {
                     "type": "plain_text",
                     "text": "Enter the iCal Link here."

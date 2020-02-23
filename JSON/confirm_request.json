@@ -25,6 +25,7 @@
         },
         {
             "type": "input",
+            "block_id": "meeting_prompt",
             "label": {
                 "type": "plain_text",
                 "text": "What would you like to do? :thought_balloon:",
@@ -75,7 +76,7 @@
             },
             "element": {
                 "type": "plain_text_input",
-                "min_length": 20,
+                "action_id": "decision_details",
                 "max_length": 1000,
                 "multiline": true,
                 "placeholder": {
