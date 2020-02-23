@@ -1,4 +1,4 @@
-class Bot:
+class ScheduleCore:
     def __init__(self):
         self.database = Database()
         self.options = None
