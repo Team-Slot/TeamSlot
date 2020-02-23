@@ -1,7 +1,7 @@
 import datetime
 
 # Splits available times into blocks of the right length
-def selectAvailableBlocks(timeBlocks, meetingLength):
+def __selectAvailableBlocks(timeBlocks, meetingLength):
     allBlocks = timeBlocks.copy()
     available = set()
 
@@ -22,12 +22,10 @@ def selectAvailableBlocks(timeBlocks, meetingLength):
     return list(available)
 
 # Select ideal options
-def selectIdealBlocks(timeBlocks, meetingLength, idealTimeStart, idealTimeEnd):
+def getSlots(timeBlocks, meetingLength, idealTimeStart, idealTimeEnd):
     blocks = selectAvailableBlocks(timeBlocks, meetingLength)
     idealBlocks = set()
     otherBlocks = set()
-
-    days = list(range(0,6)) # 0..5 (mon-fri)
 
     while blocks:
         block = blocks.pop()
