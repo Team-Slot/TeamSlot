@@ -1,6 +1,8 @@
 import json
 import os
 import sqlite3
+from threading import Thread
+
 import slack
 import datetime
 
@@ -78,15 +80,21 @@ def handle_requests():
             time_duration = values['duration']['time_duration']['selected_option']['value']
             time_duration = datetime.timedelta(hours=int(int(time_duration[-1]) * 0.5))
             description = values['description']['description_field']['value']
-            sc = ScheduleCore()
-            # options = sc.processRequest(users, date_range, working_hours, time_duration, description)
+            thread = Thread(target=calculate_options_to_db, args=(users, date_range, working_hours, time_duration, description))
+            thread.start()
         elif title == 'Meeting Request':
-            options = options_from_db()
-            filled = fill_block('request_intro', [('Meeting', options)])
-            push_block_str(filled, user_id)
+            #options = options_from_db()
+            #filled = fill_block('request_intro', [('Meeting', options)])
+            #push_block_str(filled, user_id)
 
             print()
     return ''
+
+
+def calculate_options_to_db(users, date_range, working_hours, time_duration, description):
+    sc = ScheduleCore()
+    options = sc.processRequest(users, date_range, working_hours, time_duration, description)
+    # write to db TODO
 
 
 def fill_block(file, replacements): # replacements is a list of tuples of word and list
