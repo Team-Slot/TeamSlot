@@ -4,6 +4,7 @@ import sqlite3
 import slack
 
 from flask import Flask, request
+
 app = Flask(__name__)
 
 
@@ -14,15 +15,15 @@ def handle_commands():
     command = info['command']
 
     if command == '/ts' or command == '/ts-help':
-        pass
+        push_block('help', info['user'])
     elif command == '/ts-start':
-        open_modal(trigger_id, 'setup')
+        open_modal('setup', trigger_id)
     elif command == '/ts-select':
-        open_modal(trigger_id, 'select')
+        open_modal('request', trigger_id)
     elif command == '/ts-confirm':
-        open_modal(trigger_id, 'confirm')
+        open_modal('confirm_request', trigger_id)
     elif command == '/ts-config':
-        open_modal(trigger_id, 'config')
+        open_modal('config', trigger_id)
     return ''
 
 
@@ -31,31 +32,25 @@ def handle_events():
     info = request.json
     event = info['event']
     event_type = event['type']
+    user_id = event['user']
 
     if event_type == 'team_join':
-        user_id = event['user']  # TODO
-        prompt_for_ical(user_id)
+        push_block('intro', user_id)
     elif event_type == 'app_home_opened':
-        print('hey')
-        user_id = event['user']
         if not is_user_stored(user_id):
-            prompt_for_ical(user_id)
+            push_block('intro', user_id)
         else:
             pass
-    elif event_type == 'message' and event['channel_type'] == 'im' and 'client_msg_id' in event:
-        print('heyo')  # will become modal so change
 
-    print(str(request.json))
     return ''
 
 
-def prompt_for_ical(user_id):
-    client = slack.WebClient(token=os.environ['SLACK_API_TOKEN'])
-
-    client.chat_postMessage(
-        channel=user_id,
-        blocks=[get_blocks('intro')]
-        )
+@app.route('/slack/requests', methods=['POST'])
+def handle_requests():
+    info = json.loads(request.form['payload'])
+    if 'type' in info and info['type'] == 'view_submission':
+        print('submit')
+    return ''
 
 
 def store_user(user_id, ical_link):
@@ -68,7 +63,7 @@ def store_user(user_id, ical_link):
     db.close()
 
 
-def open_modal(trigger_id, file):
+def open_modal(file, trigger_id):
     client = slack.WebClient(token=os.environ['SLACK_API_TOKEN'])
 
     client.views_open(trigger_id=trigger_id, view=get_view(file))
@@ -86,9 +81,13 @@ def get_blocks(file):
         return data['blocks']
 
 
+def push_block(block_name, user_id):
+    client = slack.WebClient(token=os.environ['SLACK_API_TOKEN'])
 
-def push_block(block_name):
-    pass  # TODO
+    client.chat_postMessage(
+        channel=user_id,
+        blocks=get_blocks(block_name)
+    )
 
 
 def is_user_stored(user_id):
