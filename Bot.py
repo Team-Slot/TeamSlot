@@ -1,4 +1,4 @@
-class Scheduler:
+class Bot:
     def __init__(self, idealStart, idealEnd):
         self.users = list()
         self.idealTimes = list()
