@@ -4,7 +4,7 @@
             "type": "section",
             "text": {
                 "type": "mrkdwn",
-                "text": "Hey friend! 👋 My name is *TeamSlot*. I'm here to help you schedule meetings with your peers through Slack."
+                "text": "Hey <User>! 👋 My name is *TeamSlot*. I'm here to help you schedule meetings with your peers through Slack."
             }
         },
         {

@@ -4,14 +4,7 @@
 			"type": "section",
 			"text": {
 				"type": "mrkdwn",
-				"text": "Great, now we're ready to start scheduling!"
-			}
-		},
-		{
-			"type": "section",
-			"text": {
-				"type": "mrkdwn",
-				"text": "You can start scheduling a meeting by using the `/ts` command. I'll then send you a message :envelope: that asks you for your attendees and your preferences."
+				"text": "You can start scheduling a meeting by using the `/ts-start` command. I'll then send you a message :envelope: that asks you for your attendees and your preferences. \n\n When prompted, you can use the `/ts-select` command to choose which meetings you can't attend from a list generated from your university :mortar_board: timetable. \n\n Also, as an owner of a meeting, you can confirm, reschedule or cancel a meeting :family: using the `/ts-confirm` command. \n\n Finally, at any time you can use the `/ts-config` command to change the iCal :calendar: address you originally provided."
 			}
 		},
 		{
@@ -22,7 +15,7 @@
 			"elements": [
 				{
 					"type": "mrkdwn",
-					"text": "❓ You can get help at any time with the `/ts help` command."
+					"text": "❓ You can get help at any time with the `/ts` or `/ts-help` command."
 				}
 			]
 		}
