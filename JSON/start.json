@@ -4,14 +4,7 @@
 			"type": "section",
 			"text": {
 				"type": "mrkdwn",
-				"text": "Great, now we're ready to start scheduling!"
-			}
-		},
-		{
-			"type": "section",
-			"text": {
-				"type": "mrkdwn",
-				"text": "You can start scheduling a meeting by using the `/ts-start` command. I'll then send you a message :envelope: that asks you for your attendees and your preferences."
+				"text": "Great, now we're ready to start scheduling! \n\n You can start scheduling a meeting by using the `/ts-start` command. I'll then send you a message :envelope: that asks you for your attendees and your preferences."
 			}
 		},
 		{

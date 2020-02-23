@@ -2,7 +2,7 @@
 	"type": "modal",
 	"title": {
 		"type": "plain_text",
-		"text": "Plan Meeting :notebook:",
+		"text": "Plan Meeting",
 		"emoji": true
 	},
 	"submit": {

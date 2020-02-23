@@ -4,14 +4,7 @@
             "type": "section",
             "text": {
                 "type": "mrkdwn",
-                "text": "Hey <User>! 👋 My name is *TeamSlot*. I'm here to help you schedule meetings with your peers through Slack."
-            }
-        },
-        {
-            "type": "section",
-            "text": {
-                "type": "mrkdwn",
-                "text": "I need your *timetable* before we can get started. \n Please go to https://timetable.soton.ac.uk/Feed/Get and message me it so we can continue. :fast_forward:"
+                "text": "Hey <User>! 👋 My name is *TeamSlot*. I'm here to help you schedule meetings with your peers through Slack. \n\n I need your *timetable* before we can get started. \n Please enter the command `/ts-config` so we can continue. :fast_forward:"
             }
         }
 	]
