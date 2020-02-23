@@ -56,7 +56,10 @@ def handle_requests():
 
         if title == 'Configuration':
             store_user(user_id, values['calendar']['calendar_input']['value'])
-        elif title == ''
+            push_block('start', user_id)
+        elif title == 'Plan Meeting':
+            print()
+            pass
     return ''
 
 
@@ -67,6 +70,7 @@ def store_user(user_id, ical_link):
     c.execute('''INSERT OR REPLACE INTO users
                  VALUES(?, ?)''', (user_id, ical_link))
 
+    db.commit()
     db.close()
 
 
