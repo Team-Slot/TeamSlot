@@ -9,7 +9,10 @@ time_range = (time(6, 0), time(19, 0))  # hard-coded test time range
 
 
 def union(l1, l2):
-    return [(min(s1, s2), max(e1, e2)) for (s1, e1), (s2, e2) in product(l1, l2) if s1 < e2 and e1 > s2]
+    if not l1:
+        return l2
+    else:
+        return [(min(s1, s2), max(e1, e2)) for (s1, e1), (s2, e2) in product(l1, l2) if s1 < e2 and e1 > s2]
 
 
 def invert(l):
@@ -39,8 +42,7 @@ def invert(l):
 def getAvailableBlocks(ical_links, date_range, time_range):
     cals = []  # list of calendars from iCal links
     for link in ical_links:
-        cals.append(Calendar(requests.get(link).text).timeline.included(arrow.get(date_range[0]), arrow.get(
-            date_range[1])))  # extract only dates within date_range defined in params
+        cals.append(Calendar(requests.get(link).text).timeline.included(arrow.get(date_range[0]), arrow.get(date_range[1])))  # extract only dates within date_range defined in params
 
     blocks = []
 
@@ -66,7 +68,12 @@ def getAvailableBlocks(ical_links, date_range, time_range):
 
             blocks[i].append((begin, end))
 
-    overlap = union(blocks[0], blocks[1])
+    overlap = []
+    for block_cal in blocks:
+        # print(block_cal)
+        overlap = union(overlap, block_cal)
+
+
     # todo : extend to more than two users
     return invert(overlap)
 
@@ -74,8 +81,10 @@ def getAvailableBlocks(ical_links, date_range, time_range):
 def test():
     adomas_url = "https://timetable.soton.ac.uk/Feed/Index/fIHGtdhnnOuh7EhjMXQpJnRDR6epdJ7dXwgeUFEmcXRFB-aSPSEL8_ePZ17eCvDjzen3DuMZKJOOcDRzUxM3rA2"
     giorgio_url = "https://timetable.soton.ac.uk/Feed/Index/3F5CEtjYxzy3GoqHuz66AdH6zeQdZrrIFz8fMVBq9-iZOwA0W71GlsIbkmxtukoR36zSPs1OGxbnv5-YmyJ87g2"
+    third_url = "https://timetable.soton.ac.uk/Feed/Index/3F5CEtjYxzy3GoqHuz66AdH6zeQdZrrIFz8fMVBq9-iZOwA0W71GlsIbkmxtukoR36zSPs1OGxbnv5-YmyJ87g2"
+    fourth_url = "https://timetable.soton.ac.uk/Feed/Index/eXtEFfhVzjoKzeWi0QIhmzGoKwDix-yddsieN9n-9r0P4P93FkEhUlgfrckqhOj81B2hR_JlzuJHHt3OnCyy5g2"
 
-    test_links = [adomas_url, giorgio_url]
+    test_links = [adomas_url, giorgio_url, fourth_url]
 
     final = getAvailableBlocks(test_links, date_range, time_range)
 
