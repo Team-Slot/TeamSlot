@@ -46,3 +46,9 @@ class ScheduleCore:
             return possibleSlots[0]
         else:
             return None
+
+date_range = (datetime(2019, 9, 30, 0, 0), datetime(2019, 10, 10, 0, 0))  # hard-coded test date range
+time_range = (time(6, 0), time(19, 0))  # hard-coded test time range
+
+sc = ScheduleCore()
+sc.processRequest([1,2], date_range, time_range, timedelta(hours=1))
