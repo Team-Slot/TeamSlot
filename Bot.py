@@ -1,75 +1,44 @@
 class Bot:
-    def __init__(self, idealStart, idealEnd):
-        self.users = list()
-        self.idealTimes = list()
-        self.nonIdealTimes = list()
-        self.sentItems = list()
-        self.idealStart = idealStart
-        self.idealEnd = idealEnd
+    def __init__(self):
+        self.database = Database()
+        self.options = None
 
-    def addUser(self,usr):
-        self.users.append(usr)
+    def addUser(self,userid, calURL):
+        database.addUser(userid, calURL)
 
-    def setIdealTimes(self,idealTimes):
-        self.idealTimes = idealTimes
-
-    def setNonIdealTimes(self,nit):
-        self.nonIdealTimes = nit
+    def updateUser(self, userid, newCalURL):
+        database.updateUser(userid, newCalURL)
 
     # Processes incoming requests to schedule
     def processRequest(self, users, dateRange, workingHours, meetingLength, idealHours = (9,17)):
-        pass
+        # Gather calendar URLs from userids
+        calURLS = []
 
-    ##  invoked when message received with times users agreed on (after being prompted)
-    ##  if empty, should send another 3. If has one, should send that one as the one chosen
-    ##  if more than one invoke method to select one randomly
-    def processReceivedAgreedTimes(self,agreedTimes):
-        if (len(agreedTimes) == 0):
-            return self.selectNextThreeItems() 
-        elif (len(agreedTimes) == 1):
-            return agreedTimes ## this means this one is the one we confirm straight away
+        for user in users:
+            calURLS.append(database.getCal(user))
+
+        # Parse calendar URLS to extract available blocks
+        availableBlocks = getAvailableBlocks(calLinks, dateRange, workingHours)
+
+        # Split blocks into meeting slots, categorised by priority
+        slots = getSlots(availableBlocks, meetingLength, idealHours[0], idealHours[1])
+
+        idealSlots = slots[0]
+        otherSlots = slots[1]
+
+        # Instantiate Options class to handle selecting options to send
+        self.options = Options(idealSlots, otherSlots)
+
+        # Send first options
+        return self.optionsSent
+
+    def getMoreOptions(self):
+        return self.options.getOptions()
+
+    def getFinalSlot(unavailableSlots):
+        possibleSlots = self.getOptions() - set(unavailableSlots)
+
+        if possibleSlots:
+            return possibleSlots[0]
         else:
-            return agreedTimes[0] ## select this as the final meeting time
-
-    ## selects 3 items to send out as best available meeting slots
-    def selectNextThreeTimes(self):
-        selectedThree = list()
-
-        ##  repeat selection of next item in list as long as length is smaller than 3
-        while len(selectedThree) < 3:
-            ##  next item to send
-            itemToSend = None
-
-            ##  checking every pair in idealTimes first, if found item to send break loop 
-            for pair in self.idealTimes:
-                if pair in self.sentItems:
-                    continue ## do nothing
-
-                else:
-                    itemToSend = pair
-                    break
-
-            ##  if item to send found in ideal times, add to sent items and seleted three
-            #  then move to next loop iteration
-            if itemToSend != None:
-                selectedThree.append(itemToSend)
-                sentItems.append(itemToSend)
-                continue
-
-            for pair in self.nonIdealTimes:
-                if pair in self.sentItems:
-                    continue ## continue to next loop iteration
-
-                else:
-                    itemToSend = pair
-                    break 
-
-            if itemToSend != None:
-                selectedThree.append(itemToSend)
-                sentItems.append(itemToSend)
-                continue
-
-            else:
-                break
-
-        return selectedThree
+            return None
