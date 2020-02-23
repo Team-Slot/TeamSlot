@@ -13,15 +13,15 @@ def union(l1, l2):
 
 # Takes a list of datetime tuples and returns the inversion within a capped time range
 # Used to convert list of unavailable times into available times within working hours
-def invert(l):
+def invert(l, timeRange):
     inverted = []
 
     # Enumerate through list to build new datetimes
     for i, (a, b) in enumerate(l):
 
         # Calculates available block boundaries from current list item and caps
-        dt_start = datetime.combine(datetime.date(a), time_range[0])
-        dt_end = datetime.combine(datetime.date(a), time_range[1])
+        dt_start = datetime.combine(datetime.date(a), timeRange[0])
+        dt_end = datetime.combine(datetime.date(a), timeRange[1])
 
         # Invert datetime to available blocks and append
         if (i == 0 and a > dt_start) or datetime.date(l[i - 1][0]) != datetime.date(a):
@@ -78,4 +78,4 @@ def getAvailableBlocks(ical_links, date_range, time_range):
         overlap = union(overlap, block_cal)
 
 
-    return invert(overlap)
+    return invert(overlap,time_range)

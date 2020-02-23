@@ -3,7 +3,7 @@ class Database:
     def __init__(self):
         pass
 
-    def getCal(userid):
+    def getCal(self, userid):
         if (userid == 1):
             return 'https://timetable.soton.ac.uk/Feed/Index/fIHGtdhnnOuh7EhjMXQpJnRDR6epdJ7dXwgeUFEmcXRFB-aSPSEL8_ePZ17eCvDjzen3DuMZKJOOcDRzUxM3rA2'
         elif (userid == 2):
