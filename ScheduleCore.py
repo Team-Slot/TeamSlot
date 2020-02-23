@@ -50,11 +50,11 @@ class ScheduleCore:
         else:
             return None
 
-date_range = (datetime(2020, 2, 24, 0, 0), datetime(2020, 2, 28, 0, 0))  # hard-coded test date range
-time_range = (time(8, 0), time(19, 0))  # hard-coded test time range
+date_range = (datetime(2020, 2, 24, 0, 0), datetime(2020, 2, 25, 0, 0))  # hard-coded test date range
+time_range = (time(9, 0), time(17, 0))  # hard-coded test time range
 
 sc = ScheduleCore()
-three = sc.processRequest([1,2], date_range, time_range, timedelta(hours=1))
+three = sc.processRequest([3,1,2], date_range, time_range, timedelta(hours=1))
 
 print("\n")
 for o in three:
