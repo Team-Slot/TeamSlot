@@ -91,9 +91,11 @@ def handle_requests():
             if len([s for s in selected if s['value'] == 'allMeetings']) > 0:
                 write_options(options, user_id)
             else:
-                options = list()
                 for s in selected:
-                    options.remove(s['text']['text'])
+                    try:
+                        options.remove(s['text']['text'])
+                    except ValueError:
+                        pass
                 write_options(options, user_id)
             db = sqlite3.connect('teamslot.db')
             c = db.cursor()
@@ -107,9 +109,14 @@ def handle_requests():
                     c.execute('''SELECT DISTINCT user_id FROM availables
                             ''')
                     for user in c.fetchall():
-                        text = fill_block('confirm', [('User',['@' + get_user_name(user[0])]), ('Master', ['@' + user_id]), ('Time', [str(t[1])])])
-                        push_block_str(text, user_id)
+                        text = fill_block('confirm', [('User',['@' + get_user_name(user[0])]), ('Master', ['@' + get_user_name(user_id)]), ('Time', [str(t[1])])])
+                        push_block_str(text, user[0])
+                    c.execute('''DELETE FROM availables''')
+                    c.execute('''DELETE FROM options''')
+                    db.commit()
+                    db.close()
                     break
+
     return ''
 
 
@@ -154,7 +161,9 @@ def calculate_options_to_db(users, date_range, working_hours, time_duration, des
         c.execute('''INSERT OR REPLACE INTO options
                  VALUES(?, ?)''', (begin, end))
 
-    c.execute('''INSERT INTO user_number
+    c.execute('''DELETE FROM user_number''')
+
+    c.execute('''INSERT OR REPLACE INTO user_number
                  VALUES(?)''', (len(users),))
 
     db.commit()
