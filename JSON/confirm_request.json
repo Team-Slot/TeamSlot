@@ -1,0 +1,88 @@
+{
+	"type": "modal",
+    "submit": {
+		"type": "plain_text",
+		"text": "Submit",
+		"emoji": true
+	},
+	"close": {
+		"type": "plain_text",
+		"text": "Cancel",
+		"emoji": true
+	},
+	"title": {
+		"type": "plain_text",
+		"text": "Meeting Confirmation",
+		"emoji": true
+	},
+    "blocks": [
+        {
+            "type": "section",
+            "text": {
+                "type": "mrkdwn",
+                "text": "Hey <Master>! 👋 Great news! :tada: We found an available time slot for your meeting based off the responses from your team! :confetti_ball: \n\n The time slot we found is at <Time Slot>. \n\n Would you like to confirm :thumbsup: this time with your team?"
+            }
+        },
+        {
+            "type": "input",
+            "label": {
+                "type": "plain_text",
+                "text": "What would you like to do? :thought_balloon:",
+                "emoji": true
+            },
+            "element": {
+              "type": "radio_buttons",
+              "action_id": "decision",
+              "initial_option": {
+                "value": "decision1",
+                  "text": {
+                    "type": "plain_text",
+                    "text": "Confirm Meeting"
+                  }
+                },
+                "options": [
+                  {
+                    "value": "decision1",
+                    "text": {
+                      "type": "plain_text",
+                      "text": "Confirm Meeting"
+                    }
+                  },
+                  {
+                    "value": "decision2",
+                    "text": {
+                      "type": "plain_text",
+                      "text": "Reschedule Meeting"
+                    }
+                  },
+                  {
+                    "value": "decision3",
+                    "text": {
+                      "type": "plain_text",
+                      "text": "Cancel Meeting"
+                    }
+                  }
+                ]
+            }
+        },
+        {
+            "type": "input",
+            "block_id": "details",
+            "label": {
+                "type": "plain_text",
+                "text": "Regardless of your choice, I need a message :pencil: for your team explaining the situation:",
+                "emoji": true
+            },
+            "element": {
+                "type": "plain_text_input",
+                "min_length": 20,
+                "max_length": 1000,
+                "multiline": true,
+                "placeholder": {
+                    "type": "plain_text",
+                    "text": "Provide details of the reason for your decision and/or the specifics of your meeting for your team."
+                }
+            }
+        }
+    ]
+}
