@@ -7,6 +7,7 @@ import datetime
 from flask import Flask, request
 
 from ScheduleCore import ScheduleCore
+import re
 
 app = Flask(__name__)
 
@@ -17,10 +18,12 @@ def handle_commands():
     trigger_id = info['trigger_id']
     command = info['command']
 
+    user_id = info['user_id']
     if command == '/ts' or command == '/ts-help':
-        push_block('help', info['user'])
+        push_block('help', user_id)
     elif command == '/ts-start':
-        open_modal('setup', trigger_id)
+        text = fill_block('setup', [('Master_ID', [user_id])])
+        open_modal_str(text, trigger_id)
     elif command == '/ts-select':
         open_modal('request', trigger_id)
     elif command == '/ts-confirm':
@@ -76,10 +79,31 @@ def handle_requests():
             time_duration = datetime.timedelta(hours=int(int(time_duration[-1]) * 0.5))
             description = values['description']['description_field']['value']
             sc = ScheduleCore()
-            sc.processRequest(users, date_range, working_hours, time_duration, description)
+            # options = sc.processRequest(users, date_range, working_hours, time_duration, description)
         elif title == 'Meeting Request':
+            options = options_from_db()
+            filled = fill_block('request_intro', [('Meeting', options)])
+            push_block_str(filled, user_id)
+
             print()
     return ''
+
+
+def fill_block(file, replacements): # replacements is a list of tuples of word and list
+    with open('JSON/{}.json'.format(file)) as json_file:
+        text = json_file.read()
+    for (word, repls) in replacements:
+        i = 0
+        while True:
+            new_text = re.sub('<.*{}.*>'.format(word), repls[i], text)
+            if new_text != text:
+                text = new_text
+                i += 1
+                i %= len(repls)
+            else:
+                break
+
+    return text
 
 
 def store_user(user_id, ical_link):
@@ -97,6 +121,12 @@ def open_modal(file, trigger_id):
     client = slack.WebClient(token=os.environ['SLACK_API_TOKEN'])
 
     client.views_open(trigger_id=trigger_id, view=get_view(file))
+
+
+def open_modal_str(text, trigger_id):
+    client = slack.WebClient(token=os.environ['SLACK_API_TOKEN'])
+
+    client.views_open(trigger_id=trigger_id, view=json.loads(text))
 
 
 def get_view(file):
@@ -117,6 +147,15 @@ def push_block(block_name, user_id):
     client.chat_postMessage(
         channel=user_id,
         blocks=get_blocks(block_name)
+    )
+
+
+def push_block_str(str, user_id):
+    client = slack.WebClient(token=os.environ['SLACK_API_TOKEN'])
+
+    client.chat_postMessage(
+        channel=user_id,
+        blocks=json.loads(str)['blocks']
     )
 
 
