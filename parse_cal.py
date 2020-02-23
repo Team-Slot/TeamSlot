@@ -36,7 +36,7 @@ def invert(l):
     return inverted
 
 
-def get_available_blocks(ical_links, date_range, time_range):
+def getAvailableBlocks(ical_links, date_range, time_range):
     cals = []  # list of calendars from iCal links
     for link in ical_links:
         cals.append(Calendar(requests.get(link).text).timeline.included(arrow.get(date_range[0]), arrow.get(
@@ -77,7 +77,7 @@ def test():
 
     test_links = [adomas_url, giorgio_url]
 
-    final = get_available_blocks(test_links, date_range, time_range)
+    final = getAvailableBlocks(test_links, date_range, time_range)
 
     for b in final:
         print(b)
