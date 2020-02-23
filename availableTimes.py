@@ -1,9 +1,9 @@
 import datetime
 
 # Splits available times into blocks of the right length
-def __selectAvailableBlocks(timeBlocks, meetingLength):
-    allBlocks = timeBlocks.copy()
-    available = set()
+def _splitBlocks(availableBlocks, meetingLength):
+    allBlocks = availableBlocks.copy()
+    slots = set()
 
     while allBlocks:
         block = allBlocks.pop()
@@ -13,29 +13,29 @@ def __selectAvailableBlocks(timeBlocks, meetingLength):
         duration = end - start
         
         if (duration >= meetingLength):
-            available.add((start, start + meetingLength))
+            slots.add((start, start + meetingLength))
 
             if (duration > meetingLength):
                 allBlocks.append((start + meetingLength, end))
 
 
-    return list(available)
+    return list(slots)
 
 # Select ideal options
-def getSlots(timeBlocks, meetingLength, idealTimeStart, idealTimeEnd):
-    blocks = selectAvailableBlocks(timeBlocks, meetingLength)
-    idealBlocks = set()
-    otherBlocks = set()
+def getSlots(availableBlocks, meetingLength, idealHours):
+    slots = _splitBlocks(availableBlocks, meetingLength)
+    idealSlots = set()
+    otherSlots = set()
 
-    while blocks:
-        block = blocks.pop()
+    while slots:
+        slot = slots.pop()
 
-        startHour = block[0].hour
-        endHour = block[1].hour
+        startHour = slot[0].hour
+        endHour = slot[1].hour
 
-        if (startHour >= idealTimeStart and endHour <= idealTimeEnd):
-            idealBlocks.add(block)
+        if (startHour >= idealHours[0] and endHour <= idealHours[1]):
+            idealSlots.add(slot)
         else:
-            otherBlocks.add(block)
+            otherSlots.add(slot)
 
-    return (list(idealBlocks), list(otherBlocks))
+    return (list(idealSlots), list(otherSlots))
