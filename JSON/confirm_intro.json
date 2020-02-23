@@ -4,7 +4,7 @@
             "type": "section",
             "text": {
                 "type": "mrkdwn",
-                "text": "Hey <Master>! 👋 Great news! :tada: We found an available time slot for your meeting based off the responses from your team! :confetti_ball: \n\n The time slot we found is at <Time Slot>. \n\n Use the `ts-confirm` :heavy_check_mark: command to decide what to do."
+                "text": "Hey <Master>! 👋 Great news! :tada: We found an available time slot for your meeting based off the responses from your team! :confetti_ball: \n\n The time slot we found is at <TimeSlot>. \n\n Use the `ts-confirm` :heavy_check_mark: command to decide what to do."
             }
         }
     ]

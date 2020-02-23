@@ -88,10 +88,35 @@ def handle_requests():
             selected = values['meetings']['meeting']['selected_options']
             allValues = info['view']['blocks'][0]['element']['options']
             if len([s for s in selected if s['value'] == 'allMeetings']) > 0:
-
-
-            print()
+                write_options([v['text']['text'] for v in allValues if v != 'All options are fine'], user_id)
+            else:
+                options = list()
+                for s in selected:
+                    options.append(s['text']['text'])
+                write_options(options, user_id)
+            db = sqlite3.connect('teamslot.db')
+            c = db.cursor()
+            c.execute('''SELECT COUNT(*) FROM availables
+                        GROUP BY option''')
+            max = c.execute('''SELECT * from user_number''')
+            uers = max.fetchone()[0]
+            for t in c.fetchall():
+                if uers == t[0]:
+                    text = fill_block('confirm', [('User',[user_id]), ('Master', [user_id]), ('TimeSlot', [t[0]])])
+                    push_block_str(text, user_id)
+                    break
     return ''
+
+
+def write_options(options, user_id):
+    db = sqlite3.connect('teamslot.db')
+    c = db.cursor()
+    for option in options:
+        c.execute('''INSERT INTO availables
+                     VALUES(?, ?)''', (option, user_id))
+
+    db.commit()
+    db.close()
 
 
 def options_from_db():
