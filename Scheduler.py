@@ -21,17 +21,6 @@ class Scheduler:
     def setNonIdealTimes(self,nit):
         self.nonIdealTimes = nit
 
-    ##  When receiving a list of times, will classify into ideal times and non ideal times then store
-    def classifyReceivedTimes(self,received):
-        ## received is a list of DateTime tuples
-        ## if within ideal time range, then add to idealTimes
-        ## if not, add to nonIdealTimes
-        for start,end in received:
-            if (start >= self.idealStart and end <= self.idealEnd):
-                self.idealTimes.append((start,end))
-            else:
-                self.nonIdealTimes.append((start,end))
-
     ##  invoked when message received with times users agreed on (after being prompted)
     ##  if empty, should send another 3. If has one, should send that one as the one chosen
     ##  if more than one invoke method to select one randomly
