@@ -27,8 +27,6 @@ def getSlots(timeBlocks, meetingLength, idealTimeStart, idealTimeEnd):
     idealBlocks = set()
     otherBlocks = set()
 
-    days = list(range(0,6)) # 0..5 (mon-fri)
-
     while blocks:
         block = blocks.pop()
 

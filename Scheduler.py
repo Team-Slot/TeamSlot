@@ -16,6 +16,10 @@ class Scheduler:
     def setNonIdealTimes(self,nit):
         self.nonIdealTimes = nit
 
+    # Processes incoming requests to schedule
+    def processRequest(self, users, dateRange, workingHours, meetingLength, idealHours = (9,17)):
+        pass
+
     ##  invoked when message received with times users agreed on (after being prompted)
     ##  if empty, should send another 3. If has one, should send that one as the one chosen
     ##  if more than one invoke method to select one randomly
