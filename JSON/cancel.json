@@ -1,0 +1,11 @@
+{
+	"blocks": [
+		{
+			"type": "section",
+			"text": {
+				"type": "mrkdwn",
+				"text": "Hey <User>! 👋 Unfortunately, *<Master>* has cancelled :x: the meeting you had planned. \n They provided the following reasoning: \n\n <Details>"
+			}
+		}
+	]
+}

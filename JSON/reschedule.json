@@ -1,0 +1,11 @@
+{
+	"blocks": [
+		{
+			"type": "section",
+			"text": {
+				"type": "mrkdwn",
+				"text": "Hey <User>! 👋 *<Master>* has requested to reschedule the meeting with a different set of times. :hourglass: \n They provided the following reasoning: \n\n <Details> \n\n Use the `ts-select` command to select from the newly generated available times."
+			}
+		}
+	]
+}

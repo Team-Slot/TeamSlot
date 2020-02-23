@@ -20,14 +20,7 @@
 			"type": "section",
 			"text": {
 				"type": "mrkdwn",
-				"text": "Hey <User>! 👋 *<Master>* has requested to schedule a meeting :page_facing_up: with you with the following reason: \n <Description>"
-			}
-		},
-		{
-			"type": "section",
-			"text": {
-				"type": "mrkdwn",
-				"text": "From the following options, please tick :white_check_mark: the times that you *CAN'T* :no_entry_sign: make:"
+				"text": "From the following options, please tick :ballot_box_with_check: the times that you *CAN'T* :no_entry_sign: make:"
 			},
 			"accessory": {
 				"type": "checkboxes",
@@ -56,73 +49,6 @@
 					}
 				]
 			}
-        },
-        {
-			"type": "actions",
-			"elements": [
-				{
-                    "type": "button",
-                    "action_id": "accept_meetings",
-					"text": {
-                        "type": "plain_text",
-                        "text": "Accept All"
-                    },
-                    "style": "primary",
-                    "confirm": {
-                        "title": {
-                            "type": "plain_text",
-                            "text": "Confirm all",
-                            "emoji": true
-                        },
-                        "text": {
-                            "type": "plain_text",
-                            "text": "Are you sure you want to confirm :heavy_check_mark: all meetings?",
-                            "emoji": true
-                        },
-                        "confirm": {
-                            "type": "plain_text",
-                            "text": "Yes",
-                            "emoji": true
-                        },
-                        "deny": {
-                            "type": "plain_text",
-                            "text": "No",
-                            "emoji": true
-                        }
-                    }
-				},
-				{
-                    "type": "button",
-                    "action_id": "decline_meetings",
-					"text": {
-                        "type": "plain_text",
-                        "text": "Decline All"
-                    },
-                    "style": "danger",
-                    "confirm": {
-                        "title": {
-                            "type": "plain_text",
-                            "text": "Decline all",
-                            "emoji": true
-                        },
-                        "text": {
-                            "type": "plain_text",
-                            "text": "Are you sure you want to decline :x: all meetings?",
-                            "emoji": true
-                        },
-                        "confirm": {
-                            "type": "plain_text",
-                            "text": "Yes",
-                            "emoji": true
-                        },
-                        "deny": {
-                            "type": "plain_text",
-                            "text": "No",
-                            "emoji": true
-                        }
-                    }
-				}
-			]
-		}
+        }
 	]
 }

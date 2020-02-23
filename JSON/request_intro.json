@@ -1,11 +1,11 @@
 {
 	"blocks": [
 		{
-            "type": "section",
-            "text": {
-                "type": "mrkdwn",
-                "text": "Hey <User>! 👋 My name is *TeamSlot*. I'm here to help you schedule meetings with your peers through Slack. \n\n I need your *timetable* before we can get started. \n Please enter the command `/ts-config` so we can continue. :fast_forward:"
-            }
-        }
+			"type": "section",
+			"text": {
+				"type": "mrkdwn",
+				"text": "Hey <User>! 👋 *<Master>* has requested to schedule a meeting :page_facing_up: with you with the following reason: \n <Description> \n\n Use the `ts-select` command to respond. :outbox_tray:"
+			}
+		}
 	]
 }

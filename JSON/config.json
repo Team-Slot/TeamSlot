@@ -17,11 +17,17 @@
 	},
     "blocks": [
         {
+            "type": "section",
+            "text": {
+                "type": "mrkdwn",
+                "text": "Go to https://timetable.soton.ac.uk/Feed/Get"
+            }
+        },
+        {
             "type": "input",
             "label": {
                 "type": "plain_text",
-                "text": "Go to https://timetable.soton.ac.uk/Feed/Get and enter the iCal :calendar: link it provides below:",
-                "emoji": true
+                "text": "Enter the iCal :calendar: link it provides below:"
             },
             "element": {
                 "type": "plain_text_input",

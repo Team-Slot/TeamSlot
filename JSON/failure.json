@@ -1,0 +1,11 @@
+{
+	"blocks": [
+		{
+			"type": "section",
+			"text": {
+				"type": "mrkdwn",
+				"text": "Hey <User>! 👋 Unfortunately, we weren't able to schedule a meeting that all the participants you selected could make with your given meeting parameters. :disappointed: \n\n Use the `ts-start` command to start the process again. :repeat:"
+			}
+		}
+	]
+}
