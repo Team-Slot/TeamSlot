@@ -22,7 +22,7 @@ def __selectAvailableBlocks(timeBlocks, meetingLength):
     return list(available)
 
 # Select ideal options
-def selectIdealBlocks(timeBlocks, meetingLength, idealTimeStart, idealTimeEnd):
+def getSlots(timeBlocks, meetingLength, idealTimeStart, idealTimeEnd):
     blocks = selectAvailableBlocks(timeBlocks, meetingLength)
     idealBlocks = set()
     otherBlocks = set()
