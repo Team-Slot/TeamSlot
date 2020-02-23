@@ -29,12 +29,11 @@ def consolidate(intervals):
 
 # Take two lists of datetime tuples and returns the union
 def union(l1, l2):
-    # if not l1:
-    #     return l2
-    # else:
+    if not l1:
+        return l2
+    else:
     # return [(min(s1, s2), max(e1, e2)) for (s1, e1), (s2, e2) in product(l1, l2) if s1 <= e2 and e1 >= s2]
-
-    return consolidate([*l1, *l2])
+        return consolidate([*l1, *l2])
 
 
 # Takes a list of datetime tuples and returns the inversion within a capped time range
@@ -105,7 +104,13 @@ def getAvailableBlocks(ical_links, date_range, time_range):
     # print(dt_blocks[1], "\n")
 
     # Take the union of tuples, combining unavailable blocks
-    overlap = list(union(dt_blocks[0], dt_blocks[1]))
+
+    overlap = []
+    for i,val in enumerate(dt_blocks):
+        overlap = union(overlap, val)
+
+    # overlap = union(dt_blocks[0], dt_blocks[1])
+
     # for block_cal in dt_blocks:
     #     overlap = union(overlap, block_cal)
     #     print("\n", block_cal)
@@ -117,11 +122,10 @@ def getAvailableBlocks(ical_links, date_range, time_range):
     # print("\n", overlap)
 
     # overlap = []
-    # for e in overlap:
     #     print("overlap: ", e)
 
     # overlap = [(datetime(2020, 2, 24, 10, 0), datetime(2020, 2, 24, 17, 0)), (datetime(2020, 2, 25, 9, 0), datetime(2020, 2, 25, 12, 0))]
 
-    invert(overlap, time_range)
+    inverted = invert( list(overlap) , time_range)
 
-    return invert(overlap, time_range)
+    return inverted
