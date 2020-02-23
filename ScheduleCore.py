@@ -1,13 +1,20 @@
+from datetime import datetime, time, timedelta
+from Database import Database
+from Options import Options
+from availableTimes import getSlots
+from parseCals import getAvailableBlocks
+
+
 class ScheduleCore:
     def __init__(self):
         self.database = Database()
         self.options = None
 
     def addUser(self,userid, calURL):
-        database.addUser(userid, calURL)
+        self.database.addUser(userid, calURL)
 
     def updateUser(self, userid, newCalURL):
-        database.updateUser(userid, newCalURL)
+        self.database.updateUser(userid, newCalURL)
 
     # Processes incoming requests to schedule
     def processRequest(self, users, dateRange, workingHours, meetingLength, idealHours = (9,17)):
@@ -15,13 +22,13 @@ class ScheduleCore:
         calURLS = []
 
         for user in users:
-            calURLS.append(database.getCal(user))
+            calURLS.append(self.database.getCal(user))
 
         # Parse calendar URLS to extract available blocks
-        availableBlocks = getAvailableBlocks(calLinks, dateRange, workingHours)
+        availableBlocks = getAvailableBlocks(calURLS, dateRange, workingHours)
 
         # Split blocks into meeting slots, categorised by priority
-        slots = getSlots(availableBlocks, meetingLength, idealHours[0], idealHours[1])
+        slots = getSlots(availableBlocks, meetingLength, (idealHours[0], idealHours[1]) )
 
         idealSlots = slots[0]
         otherSlots = slots[1]
@@ -30,15 +37,24 @@ class ScheduleCore:
         self.options = Options(idealSlots, otherSlots)
 
         # Send first options
-        return self.optionsSent
+        return self.options.getOptions()
 
     def getMoreOptions(self):
         return self.options.getOptions()
 
-    def getFinalSlot(unavailableSlots):
+    def getFinalSlot(self, unavailableSlots):
         possibleSlots = self.getOptions() - set(unavailableSlots)
 
         if possibleSlots:
             return possibleSlots[0]
         else:
             return None
+
+date_range = (datetime(2019, 9, 30, 0, 0), datetime(2019, 10, 10, 0, 0))  # hard-coded test date range
+time_range = (time(6, 0), time(19, 0))  # hard-coded test time range
+
+sc = ScheduleCore()
+three = sc.processRequest([1,2], date_range, time_range, timedelta(hours=1))
+
+for o in three:
+    print(o)

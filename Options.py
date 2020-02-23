@@ -5,22 +5,22 @@ class Options:
         self.otherSlots = otherSlots
         self.lastOptions = []
 
-    def getOptions(noOptions=3):
-        if (len(idealSlots) >= noOptions):
+    def getOptions(self, noOptions=3):
+        if (len(self.idealSlots) >= noOptions):
             # Return ideal options if there's enough
-            lastOptions = idealSlots[:noOptions]
-            idealSlots = idealSlots[noOptions:]
+            lastOptions = self.idealSlots[:noOptions]
+            idealSlots = self.idealSlots[noOptions:]
 
             return lastOptions
         else:
             # If idealSlots don't cover the number we need, mix ideal and other
-            noOthersUsed = noOptions - len(idealSlots)
+            noOthersUsed = noOptions - len(self.idealSlots)
 
-            lastOptions = idealSlots + otherSlots[:noOthersUsed]
+            lastOptions = self.idealSlots + self.otherSlots[:noOthersUsed]
             idealSlots = []
-            otherSlots = otherSlots[noOthersUsed:]
+            otherSlots = self.otherSlots[noOthersUsed:]
 
             return lastOptions
 
-    def getLastOptions():
+    def getLastOptions(self):
         return set(self.lastOptions)
