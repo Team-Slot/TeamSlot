@@ -72,32 +72,44 @@
 			"type": "section",
 			"text": {
 				"type": "mrkdwn",
-				"text": "Now I need to know what time frame you want to host :microphone: the meeting at. \n *Select a start date and an end date* :date::"
+				"text": "Now I need to know what time frame you want to host :microphone: the meeting at."
 			}
 		},
 		{
-			"type": "actions",
-            "block_id": "dates",
-			"elements": [
-				{
+			"type": "input",
+            "block_id": "start_date",
+            "label": {
+				"type": "plain_text",
+				"text": "Select a start date:",
+                "emoji": true
+			},
+			"element": {
                     "type": "datepicker",
                     "action_id": "start",
 					"placeholder": {
 						"type": "plain_text",
 						"text": "Select a start date",
 						"emoji": true
-					}
-				},
-				{
-                    "type": "datepicker",
-                    "action_id": "end",
-					"placeholder": {
-						"type": "plain_text",
-						"text": "Select an end date",
-						"emoji": true
-					}
 				}
-			]
+            }
+        },
+        {
+            "type": "input",
+            "block_id": "end_date",
+            "label": {
+				"type": "plain_text",
+				"text": "Now select an end date:",
+                "emoji": true
+			},
+            "element": {
+                "type": "datepicker",
+                "action_id": "end",
+                "placeholder": {
+                    "type": "plain_text",
+                    "text": "Select an end date",
+                    "emoji": true
+                }
+            }
 		},
 		{
 			"type": "context",
@@ -182,430 +194,714 @@
             }
         },
         {
-            "type": "section",
-            "text": {
-                "type": "mrkdwn",
-                "text": "*Minimum time:*"
+        	"type": "input",
+            "block_id": "min_time",
+            "label": {
+				"type": "plain_text",
+				"text": "Select a minimum time:",
+                "emoji": true
+			},
+            "element": 
+            {
+                "type": "static_select",
+                "placeholder": {
+                        "type": "plain_text",
+                        "text": "09:00"
+                },
+                "options": [
+                {
+                    "text": {
+                        "type": "plain_text",
+                        "text": "00:00"
+                    },
+                    "value": "min_time_1"
+                },
+                {
+                    "text": {
+                        "type": "plain_text",
+                        "text": "00:30"
+                    },
+                    "value": "min_time_2"
+                },
+                {
+                    "text": {
+                        "type": "plain_text",
+                        "text": "01:00"
+                    },
+                    "value": "min_time_3"
+                },
+                {
+                    "text": {
+                        "type": "plain_text",
+                        "text": "01:30"
+                    },
+                    "value": "min_time_4"
+                },
+                {
+                    "text": {
+                        "type": "plain_text",
+                        "text": "02:00"
+                    },
+                    "value": "min_time_5"
+                },
+                {
+                    "text": {
+                        "type": "plain_text",
+                        "text": "02:30"
+                    },
+                    "value": "min_time_6"
+                },
+                {
+                    "text": {
+                        "type": "plain_text",
+                        "text": "03:00"
+                    },
+                    "value": "min_time_7"
+                },
+                {
+                    "text": {
+                        "type": "plain_text",
+                        "text": "03:30"
+                    },
+                    "value": "min_time_8"
+                },
+                {
+                    "text": {
+                        "type": "plain_text",
+                        "text": "04:00"
+                    },
+                    "value": "min_time_9"
+                },
+                {
+                    "text": {
+                        "type": "plain_text",
+                        "text": "04:30"
+                    },
+                    "value": "min_time_10"
+                },
+                {
+                    "text": {
+                        "type": "plain_text",
+                        "text": "05:00"
+                    },
+                    "value": "min_time_11"
+                },
+                {
+                    "text": {
+                        "type": "plain_text",
+                        "text": "05:30"
+                    },
+                    "value": "min_time_12"
+                },
+                {
+                    "text": {
+                        "type": "plain_text",
+                        "text": "06:00"
+                    },
+                    "value": "min_time_13"
+                },
+                {
+                    "text": {
+                        "type": "plain_text",
+                        "text": "06:30"
+                    },
+                    "value": "min_time_14"
+                },
+                {
+                    "text": {
+                        "type": "plain_text",
+                        "text": "07:00"
+                    },
+                    "value": "min_time_15"
+                },
+                {
+                    "text": {
+                        "type": "plain_text",
+                        "text": "07:30"
+                    },
+                    "value": "min_time_16"
+                },
+                {
+                    "text": {
+                        "type": "plain_text",
+                        "text": "08:00"
+                    },
+                    "value": "min_time_17"
+                },
+                {
+                    "text": {
+                        "type": "plain_text",
+                        "text": "08:30"
+                    },
+                    "value": "min_time_18"
+                },
+                {
+                    "text": {
+                        "type": "plain_text",
+                        "text": "09:00"
+                    },
+                    "value": "min_time_19"
+                },
+                {
+                    "text": {
+                        "type": "plain_text",
+                        "text": "09:30"
+                    },
+                    "value": "min_time_20"
+                },
+                {
+                    "text": {
+                        "type": "plain_text",
+                        "text": "10:00"
+                    },
+                    "value": "min_time_21"
+                },
+                {
+                    "text": {
+                        "type": "plain_text",
+                        "text": "10:30"
+                    },
+                    "value": "min_time_22"
+                },
+                {
+                    "text": {
+                        "type": "plain_text",
+                        "text": "11:00"
+                    },
+                    "value": "min_time_23"
+                },
+                {
+                    "text": {
+                        "type": "plain_text",
+                        "text": "11:30"
+                    },
+                    "value": "min_time_24"
+                },
+                {
+                    "text": {
+                        "type": "plain_text",
+                        "text": "12:00"
+                    },
+                    "value": "min_time_25"
+                },
+                {
+                    "text": {
+                        "type": "plain_text",
+                        "text": "12:30"
+                    },
+                    "value": "min_time_26"
+                },
+                {
+                    "text": {
+                        "type": "plain_text",
+                        "text": "13:00"
+                    },
+                    "value": "min_time_27"
+                },
+                {
+                    "text": {
+                        "type": "plain_text",
+                        "text": "13:30"
+                    },
+                    "value": "min_time_28"
+                },
+                {
+                    "text": {
+                        "type": "plain_text",
+                        "text": "14:00"
+                    },
+                    "value": "min_time_29"
+                },
+                {
+                    "text": {
+                        "type": "plain_text",
+                        "text": "14:30"
+                    },
+                    "value": "min_time_30"
+                },
+                {
+                    "text": {
+                        "type": "plain_text",
+                        "text": "15:00"
+                    },
+                    "value": "min_time_31"
+                },
+                {
+                    "text": {
+                        "type": "plain_text",
+                        "text": "15:30"
+                    },
+                    "value": "min_time_32"
+                },
+                {
+                    "text": {
+                        "type": "plain_text",
+                        "text": "16:00"
+                    },
+                    "value": "min_time_33"
+                },
+                {
+                    "text": {
+                        "type": "plain_text",
+                        "text": "16:30"
+                    },
+                    "value": "min_time_34"
+                },
+                {
+                    "text": {
+                        "type": "plain_text",
+                        "text": "17:00"
+                    },
+                    "value": "min_time_35"
+                },
+                {
+                    "text": {
+                        "type": "plain_text",
+                        "text": "17:30"
+                    },
+                    "value": "min_time_36"
+                },
+                {
+                    "text": {
+                        "type": "plain_text",
+                        "text": "18:00"
+                    },
+                    "value": "min_time_37"
+                },
+                {
+                    "text": {
+                        "type": "plain_text",
+                        "text": "18:30"
+                    },
+                    "value": "min_time_38"
+                },
+                {
+                    "text": {
+                        "type": "plain_text",
+                        "text": "19:00"
+                    },
+                    "value": "min_time_39"
+                },
+                {
+                    "text": {
+                        "type": "plain_text",
+                        "text": "19:30"
+                    },
+                    "value": "min_time_40"
+                },
+                {
+                    "text": {
+                        "type": "plain_text",
+                        "text": "20:00"
+                    },
+                    "value": "min_time_41"
+                },
+                {
+                    "text": {
+                        "type": "plain_text",
+                        "text": "20:30"
+                    },
+                    "value": "min_time_42"
+                },
+                {
+                    "text": {
+                        "type": "plain_text",
+                        "text": "21:00"
+                    },
+                    "value": "min_time_43"
+                },
+                {
+                    "text": {
+                        "type": "plain_text",
+                        "text": "21:30"
+                    },
+                    "value": "min_time_44"
+                },
+                {
+                    "text": {
+                        "type": "plain_text",
+                        "text": "22:00"
+                    },
+                    "value": "min_time_45"
+                },
+                {
+                    "text": {
+                        "type": "plain_text",
+                        "text": "22:30"
+                    },
+                    "value": "min_time_46"
+                },
+                {
+                    "text": {
+                        "type": "plain_text",
+                        "text": "23:00"
+                    },
+                    "value": "min_time_47"
+                },
+                {
+                    "text": {
+                        "type": "plain_text",
+                        "text": "23:30"
+                    },
+                    "value": "min_time_48"
+                }
+                ]
             }
         },
         {
-        	"type": "actions",
-    		"block_id": "time1",
-            "elements": [
+        	"type": "input",
+            "block_id": "max_time",
+            "label": {
+				"type": "plain_text",
+				"text": "Select a minimum time:",
+                "emoji": true
+			},
+            "element": 
+            {
+                "type": "static_select",
+                "placeholder": {
+                        "type": "plain_text",
+                        "text": "09:00"
+                },
+                "options": [
                 {
-                    "type": "static_select",
-                    "placeholder": {
-                            "type": "plain_text",
-                            "text": "09"
+                    "text": {
+                        "type": "plain_text",
+                        "text": "00:00"
                     },
-                    "options": [
-                    {
-                        "text": {
-                            "type": "plain_text",
-                            "text": "00"
-                        },
-                        "value": "time1-1-0"
-                    },
-                    {
-                        "text": {
-                            "type": "plain_text",
-                            "text": "01"
-                        },
-                        "value": "time1-1-1"
-                    },
-                    {
-                        "text": {
-                            "type": "plain_text",
-                            "text": "02"
-                        },
-                        "value": "time1-1-2"
-                    },
-                    {
-                        "text": {
-                            "type": "plain_text",
-                            "text": "03"
-                        },
-                        "value": "time1-1-3"
-                    },
-                    {
-                        "text": {
-                            "type": "plain_text",
-                            "text": "04"
-                        },
-                        "value": "time1-1-4"
-                    },
-                    {
-                        "text": {
-                            "type": "plain_text",
-                            "text": "05"
-                        },
-                        "value": "time1-1-5"
-                    },
-                    {
-                        "text": {
-                            "type": "plain_text",
-                            "text": "06"
-                        },
-                        "value": "time1-1-6"
-                    },
-                    {
-                        "text": {
-                            "type": "plain_text",
-                            "text": "07"
-                        },
-                        "value": "time1-1-7"
-                    },
-                    {
-                        "text": {
-                            "type": "plain_text",
-                            "text": "08"
-                        },
-                        "value": "time1-1-8"
-                    },
-                    {
-                        "text": {
-                            "type": "plain_text",
-                            "text": "09"
-                        },
-                        "value": "time1-1-9"
-                    },
-                    {
-                        "text": {
-                            "type": "plain_text",
-                            "text": "10"
-                        },
-                        "value": "time1-1-10"
-                    },
-                    {
-                        "text": {
-                            "type": "plain_text",
-                            "text": "11"
-                        },
-                        "value": "time1-1-11"
-                    },
-                    {
-                        "text": {
-                            "type": "plain_text",
-                            "text": "12"
-                        },
-                        "value": "time1-1-12"
-                    },
-                    {
-                        "text": {
-                            "type": "plain_text",
-                            "text": "13"
-                        },
-                        "value": "time1-1-13"
-                    },
-                    {
-                        "text": {
-                            "type": "plain_text",
-                            "text": "14"
-                        },
-                        "value": "time1-1-14"
-                    },
-                    {
-                        "text": {
-                            "type": "plain_text",
-                            "text": "15"
-                        },
-                        "value": "time1-1-15"
-                    },
-                    {
-                        "text": {
-                            "type": "plain_text",
-                            "text": "16"
-                        },
-                        "value": "time1-1-16"
-                    },
-                    {
-                        "text": {
-                            "type": "plain_text",
-                            "text": "17"
-                        },
-                        "value": "time1-1-17"
-                    },
-                    {
-                        "text": {
-                            "type": "plain_text",
-                            "text": "18"
-                        },
-                        "value": "time1-1-18"
-                    },
-                    {
-                        "text": {
-                            "type": "plain_text",
-                            "text": "19"
-                        },
-                        "value": "time1-1-19"
-                    },
-                    {
-                        "text": {
-                            "type": "plain_text",
-                            "text": "20"
-                        },
-                        "value": "time1-1-20"
-                    },
-                    {
-                        "text": {
-                            "type": "plain_text",
-                            "text": "21"
-                        },
-                        "value": "time1-1-21"
-                    },
-                    {
-                        "text": {
-                            "type": "plain_text",
-                            "text": "22"
-                        },
-                        "value": "time1-1-22"
-                    },
-                    {
-                        "text": {
-                            "type": "plain_text",
-                            "text": "23"
-                        },
-                        "value": "time1-1-23"
-                    }
-                  ]
+                    "value": "max_time_1"
                 },
                 {
-                    "type": "static_select",
-                    "placeholder": {
-                            "type": "plain_text",
-                            "text": "00"
+                    "text": {
+                        "type": "plain_text",
+                        "text": "00:30"
                     },
-                    "options": [
-                    {
-                        "text": {
-                            "type": "plain_text",
-                            "text": "00"
-                        },
-                        "value": "time1-2-1"
+                    "value": "max_time_2"
+                },
+                {
+                    "text": {
+                        "type": "plain_text",
+                        "text": "01:00"
                     },
-                    {
-                        "text": {
-                            "type": "plain_text",
-                            "text": "30"
-                        },
-                        "value": "time1-2-30"
-                    }
-                  ]
+                    "value": "max_time_3"
+                },
+                {
+                    "text": {
+                        "type": "plain_text",
+                        "text": "01:30"
+                    },
+                    "value": "max_time_4"
+                },
+                {
+                    "text": {
+                        "type": "plain_text",
+                        "text": "02:00"
+                    },
+                    "value": "max_time_5"
+                },
+                {
+                    "text": {
+                        "type": "plain_text",
+                        "text": "02:30"
+                    },
+                    "value": "max_time_6"
+                },
+                {
+                    "text": {
+                        "type": "plain_text",
+                        "text": "03:00"
+                    },
+                    "value": "max_time_7"
+                },
+                {
+                    "text": {
+                        "type": "plain_text",
+                        "text": "03:30"
+                    },
+                    "value": "max_time_8"
+                },
+                {
+                    "text": {
+                        "type": "plain_text",
+                        "text": "04:00"
+                    },
+                    "value": "max_time_9"
+                },
+                {
+                    "text": {
+                        "type": "plain_text",
+                        "text": "04:30"
+                    },
+                    "value": "max_time_10"
+                },
+                {
+                    "text": {
+                        "type": "plain_text",
+                        "text": "05:00"
+                    },
+                    "value": "max_time_11"
+                },
+                {
+                    "text": {
+                        "type": "plain_text",
+                        "text": "05:30"
+                    },
+                    "value": "max_time_12"
+                },
+                {
+                    "text": {
+                        "type": "plain_text",
+                        "text": "06:00"
+                    },
+                    "value": "max_time_13"
+                },
+                {
+                    "text": {
+                        "type": "plain_text",
+                        "text": "06:30"
+                    },
+                    "value": "max_time_14"
+                },
+                {
+                    "text": {
+                        "type": "plain_text",
+                        "text": "07:00"
+                    },
+                    "value": "max_time_15"
+                },
+                {
+                    "text": {
+                        "type": "plain_text",
+                        "text": "07:30"
+                    },
+                    "value": "max_time_16"
+                },
+                {
+                    "text": {
+                        "type": "plain_text",
+                        "text": "08:00"
+                    },
+                    "value": "max_time_17"
+                },
+                {
+                    "text": {
+                        "type": "plain_text",
+                        "text": "08:30"
+                    },
+                    "value": "max_time_18"
+                },
+                {
+                    "text": {
+                        "type": "plain_text",
+                        "text": "09:00"
+                    },
+                    "value": "max_time_19"
+                },
+                {
+                    "text": {
+                        "type": "plain_text",
+                        "text": "09:30"
+                    },
+                    "value": "max_time_20"
+                },
+                {
+                    "text": {
+                        "type": "plain_text",
+                        "text": "10:00"
+                    },
+                    "value": "max_time_21"
+                },
+                {
+                    "text": {
+                        "type": "plain_text",
+                        "text": "10:30"
+                    },
+                    "value": "max_time_22"
+                },
+                {
+                    "text": {
+                        "type": "plain_text",
+                        "text": "11:00"
+                    },
+                    "value": "max_time_23"
+                },
+                {
+                    "text": {
+                        "type": "plain_text",
+                        "text": "11:30"
+                    },
+                    "value": "max_time_24"
+                },
+                {
+                    "text": {
+                        "type": "plain_text",
+                        "text": "12:00"
+                    },
+                    "value": "max_time_25"
+                },
+                {
+                    "text": {
+                        "type": "plain_text",
+                        "text": "12:30"
+                    },
+                    "value": "max_time_26"
+                },
+                {
+                    "text": {
+                        "type": "plain_text",
+                        "text": "13:00"
+                    },
+                    "value": "max_time_27"
+                },
+                {
+                    "text": {
+                        "type": "plain_text",
+                        "text": "13:30"
+                    },
+                    "value": "max_time_28"
+                },
+                {
+                    "text": {
+                        "type": "plain_text",
+                        "text": "14:00"
+                    },
+                    "value": "max_time_29"
+                },
+                {
+                    "text": {
+                        "type": "plain_text",
+                        "text": "14:30"
+                    },
+                    "value": "max_time_30"
+                },
+                {
+                    "text": {
+                        "type": "plain_text",
+                        "text": "15:00"
+                    },
+                    "value": "max_time_31"
+                },
+                {
+                    "text": {
+                        "type": "plain_text",
+                        "text": "15:30"
+                    },
+                    "value": "max_time_32"
+                },
+                {
+                    "text": {
+                        "type": "plain_text",
+                        "text": "16:00"
+                    },
+                    "value": "max_time_33"
+                },
+                {
+                    "text": {
+                        "type": "plain_text",
+                        "text": "16:30"
+                    },
+                    "value": "max_time_34"
+                },
+                {
+                    "text": {
+                        "type": "plain_text",
+                        "text": "17:00"
+                    },
+                    "value": "max_time_35"
+                },
+                {
+                    "text": {
+                        "type": "plain_text",
+                        "text": "17:30"
+                    },
+                    "value": "max_time_36"
+                },
+                {
+                    "text": {
+                        "type": "plain_text",
+                        "text": "18:00"
+                    },
+                    "value": "max_time_37"
+                },
+                {
+                    "text": {
+                        "type": "plain_text",
+                        "text": "18:30"
+                    },
+                    "value": "max_time_38"
+                },
+                {
+                    "text": {
+                        "type": "plain_text",
+                        "text": "19:00"
+                    },
+                    "value": "max_time_39"
+                },
+                {
+                    "text": {
+                        "type": "plain_text",
+                        "text": "19:30"
+                    },
+                    "value": "max_time_40"
+                },
+                {
+                    "text": {
+                        "type": "plain_text",
+                        "text": "20:00"
+                    },
+                    "value": "max_time_41"
+                },
+                {
+                    "text": {
+                        "type": "plain_text",
+                        "text": "20:30"
+                    },
+                    "value": "max_time_42"
+                },
+                {
+                    "text": {
+                        "type": "plain_text",
+                        "text": "21:00"
+                    },
+                    "value": "max_time_43"
+                },
+                {
+                    "text": {
+                        "type": "plain_text",
+                        "text": "21:30"
+                    },
+                    "value": "max_time_44"
+                },
+                {
+                    "text": {
+                        "type": "plain_text",
+                        "text": "22:00"
+                    },
+                    "value": "max_time_45"
+                },
+                {
+                    "text": {
+                        "type": "plain_text",
+                        "text": "22:30"
+                    },
+                    "value": "max_time_46"
+                },
+                {
+                    "text": {
+                        "type": "plain_text",
+                        "text": "23:00"
+                    },
+                    "value": "max_time_47"
+                },
+                {
+                    "text": {
+                        "type": "plain_text",
+                        "text": "23:30"
+                    },
+                    "value": "max_time_48"
                 }
-            ]
-        },
-        {
-            "type": "section",
-            "text": {
-                "type": "mrkdwn",
-                "text": "*Maximum time:*"
+                ]
             }
-        },
-        {
-            "type": "actions",
-            "block_id": "time2",
-            "elements": [
-                {
-                    "type": "static_select",
-                    "placeholder": {
-                            "type": "plain_text",
-                            "text": "09"
-                    },
-                    "options": [
-                    {
-                        "text": {
-                            "type": "plain_text",
-                            "text": "00"
-                        },
-                        "value": "time2-1-0"
-                    },
-                    {
-                        "text": {
-                            "type": "plain_text",
-                            "text": "01"
-                        },
-                        "value": "time2-1-1"
-                    },
-                    {
-                        "text": {
-                            "type": "plain_text",
-                            "text": "02"
-                        },
-                        "value": "time2-1-2"
-                    },
-                    {
-                        "text": {
-                            "type": "plain_text",
-                            "text": "03"
-                        },
-                        "value": "time2-1-3"
-                    },
-                    {
-                        "text": {
-                            "type": "plain_text",
-                            "text": "04"
-                        },
-                        "value": "time2-1-4"
-                    },
-                    {
-                        "text": {
-                            "type": "plain_text",
-                            "text": "05"
-                        },
-                        "value": "time2-1-5"
-                    },
-                    {
-                        "text": {
-                            "type": "plain_text",
-                            "text": "06"
-                        },
-                        "value": "time2-1-6"
-                    },
-                    {
-                        "text": {
-                            "type": "plain_text",
-                            "text": "07"
-                        },
-                        "value": "time2-1-7"
-                    },
-                    {
-                        "text": {
-                            "type": "plain_text",
-                            "text": "08"
-                        },
-                        "value": "time2-1-8"
-                    },
-                    {
-                        "text": {
-                            "type": "plain_text",
-                            "text": "09"
-                        },
-                        "value": "time2-1-9"
-                    },
-                    {
-                        "text": {
-                            "type": "plain_text",
-                            "text": "10"
-                        },
-                        "value": "time2-1-10"
-                    },
-                    {
-                        "text": {
-                            "type": "plain_text",
-                            "text": "11"
-                        },
-                        "value": "time2-1-11"
-                    },
-                    {
-                        "text": {
-                            "type": "plain_text",
-                            "text": "12"
-                        },
-                        "value": "time2-1-12"
-                    },
-                    {
-                        "text": {
-                            "type": "plain_text",
-                            "text": "13"
-                        },
-                        "value": "time2-1-13"
-                    },
-                    {
-                        "text": {
-                            "type": "plain_text",
-                            "text": "14"
-                        },
-                        "value": "time2-1-14"
-                    },
-                    {
-                        "text": {
-                            "type": "plain_text",
-                            "text": "15"
-                        },
-                        "value": "time2-1-15"
-                    },
-                    {
-                        "text": {
-                            "type": "plain_text",
-                            "text": "16"
-                        },
-                        "value": "time2-1-16"
-                    },
-                    {
-                        "text": {
-                            "type": "plain_text",
-                            "text": "17"
-                        },
-                        "value": "time2-1-17"
-                    },
-                    {
-                        "text": {
-                            "type": "plain_text",
-                            "text": "18"
-                        },
-                        "value": "time2-1-18"
-                    },
-                    {
-                        "text": {
-                            "type": "plain_text",
-                            "text": "19"
-                        },
-                        "value": "time2-1-19"
-                    },
-                    {
-                        "text": {
-                            "type": "plain_text",
-                            "text": "20"
-                        },
-                        "value": "time2-1-20"
-                    },
-                    {
-                        "text": {
-                            "type": "plain_text",
-                            "text": "21"
-                        },
-                        "value": "time2-1-21"
-                    },
-                    {
-                        "text": {
-                            "type": "plain_text",
-                            "text": "22"
-                        },
-                        "value": "time2-1-22"
-                    },
-                    {
-                        "text": {
-                            "type": "plain_text",
-                            "text": "23"
-                        },
-                        "value": "time2-1-23"
-                    }
-                  ]
-                },
-                {
-                    "type": "static_select",
-                    "placeholder": {
-                            "type": "plain_text",
-                            "text": "00"
-                    },
-                    "options": [
-                    {
-                        "text": {
-                            "type": "plain_text",
-                            "text": "00"
-                        },
-                        "value": "time2-2-0"
-                    },
-                    {
-                        "text": {
-                            "type": "plain_text",
-                            "text": "30"
-                        },
-                        "value": "time2-2-30"
-                    }
-                  ]
-                }
-            ]
         },
         {
 			"type": "context",
