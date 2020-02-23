@@ -1,13 +1,17 @@
+from datetime import datetime, time, timedelta
+from Database import Database
+from Options import Options
+
 class ScheduleCore:
     def __init__(self):
         self.database = Database()
         self.options = None
 
     def addUser(self,userid, calURL):
-        database.addUser(userid, calURL)
+        self.database.addUser(userid, calURL)
 
     def updateUser(self, userid, newCalURL):
-        database.updateUser(userid, newCalURL)
+        self.database.updateUser(userid, newCalURL)
 
     # Processes incoming requests to schedule
     def processRequest(self, users, dateRange, workingHours, meetingLength, idealHours = (9,17)):
@@ -15,7 +19,7 @@ class ScheduleCore:
         calURLS = []
 
         for user in users:
-            calURLS.append(database.getCal(user))
+            calURLS.append(self.database.getCal(user))
 
         # Parse calendar URLS to extract available blocks
         availableBlocks = getAvailableBlocks(calLinks, dateRange, workingHours)
@@ -35,7 +39,7 @@ class ScheduleCore:
     def getMoreOptions(self):
         return self.options.getOptions()
 
-    def getFinalSlot(unavailableSlots):
+    def getFinalSlot(self, unavailableSlots):
         possibleSlots = self.getOptions() - set(unavailableSlots)
 
         if possibleSlots:
