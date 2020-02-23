@@ -31,7 +31,7 @@ To use the API, developers need to first instantiate our ScheduleCore class and 
 
 Once the user has seen the slot options, they can reply to say which they won't be available for - this allows for situations where a user doesn't have all their commitments in their calendar. Following this, ScheduleCore will decide on a final slot and return this to the developer.
 
-### API functions
+### ScheduleCore functions
 
 - initialiser
 - addUser(userid, calURL) - takes a userid with a iCal URL and enters this to the database on the backend
