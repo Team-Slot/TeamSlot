@@ -4,9 +4,6 @@ from datetime import datetime, time
 from itertools import product
 import arrow
 
-date_range = (datetime(2019, 9, 30, 0, 0), datetime(2019, 10, 10, 0, 0))  # hard-coded test date range
-time_range = (time(6, 0), time(19, 0))  # hard-coded test time range
-
 
 def union(l1, l2):
     if not l1:
@@ -76,19 +73,3 @@ def getAvailableBlocks(ical_links, date_range, time_range):
 
     # todo : extend to more than two users
     return invert(overlap)
-
-
-def test():
-    adomas_url = "https://timetable.soton.ac.uk/Feed/Index/fIHGtdhnnOuh7EhjMXQpJnRDR6epdJ7dXwgeUFEmcXRFB-aSPSEL8_ePZ17eCvDjzen3DuMZKJOOcDRzUxM3rA2"
-    giorgio_url = "https://timetable.soton.ac.uk/Feed/Index/3F5CEtjYxzy3GoqHuz66AdH6zeQdZrrIFz8fMVBq9-iZOwA0W71GlsIbkmxtukoR36zSPs1OGxbnv5-YmyJ87g2"
-    third_url = "https://timetable.soton.ac.uk/Feed/Index/3F5CEtjYxzy3GoqHuz66AdH6zeQdZrrIFz8fMVBq9-iZOwA0W71GlsIbkmxtukoR36zSPs1OGxbnv5-YmyJ87g2"
-    fourth_url = "https://timetable.soton.ac.uk/Feed/Index/eXtEFfhVzjoKzeWi0QIhmzGoKwDix-yddsieN9n-9r0P4P93FkEhUlgfrckqhOj81B2hR_JlzuJHHt3OnCyy5g2"
-
-    test_links = [adomas_url, giorgio_url, fourth_url]
-
-    final = getAvailableBlocks(test_links, date_range, time_range)
-
-    for b in final:
-        print(b)
-
-test()
