@@ -35,11 +35,13 @@
                 "emoji": true
 			},
 			"element": {
-				"type": "multi_users_select",
+                "type": "multi_users_select",
+                "action_id": "participants_list",
 				"placeholder": {
 					"type": "plain_text",
 					"text": "Select participants"
-				}
+                },
+                "initial_users": ["<Master_ID>"]
 			}
 		},
         {
@@ -56,6 +58,7 @@
             "element":
                 {
                     "type": "plain_text_input",
+                    "action_id": "description_field",
                     "min_length": 5,
                     "max_length": 200,
                     "placeholder": {
@@ -125,14 +128,15 @@
         },
 		{
 			"type": "input",
-			"block_id": "duration",
+            "block_id": "duration",
 			"label": {
 				"type": "plain_text",
 				"text": "Ok great! - now I need to know how long you want the meeting to be: :straight_ruler:",
                 "emoji": true
 			},
 			"element": {
-				"type": "static_select",
+                "type": "static_select",
+                "action_id": "time_duration",
 				"placeholder": {
 					"type": "plain_text",
 					"text": "Duration of meeting in minutes"
@@ -204,9 +208,17 @@
             "element": 
             {
                 "type": "static_select",
+                "action_id": "min_time_menu",
                 "placeholder": {
                         "type": "plain_text",
+                        "text": "Minimum time"
+                },
+                "initial_option": {
+                    "text": {
+                        "type": "plain_text",
                         "text": "09:00"
+                    },
+                    "value": "min_time_19"
                 },
                 "options": [
                 {
@@ -553,15 +565,23 @@
             "block_id": "max_time",
             "label": {
 				"type": "plain_text",
-				"text": "Select a minimum time:",
+				"text": "Select a maximum time:",
                 "emoji": true
 			},
             "element": 
             {
                 "type": "static_select",
+                "action_id": "max_time_menu",
                 "placeholder": {
                         "type": "plain_text",
-                        "text": "09:00"
+                        "text": "Maximum time"
+                },
+                "initial_option": {
+                    "text": {
+                        "type": "plain_text",
+                        "text": "17:00"
+                    },
+                    "value": "max_time_35"
                 },
                 "options": [
                 {
